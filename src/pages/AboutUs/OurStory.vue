@@ -69,11 +69,11 @@ export default {
 
 <template>
   <div class="slider-container">
-    <div class="w-full flex items-center justify-between" style="margin-bottom: 56px;">
+    <div class="w-full flex items-center justify-between hide-t" style="margin-bottom: 56px;">
       <h2 class="font-gilroy slider-title">Наша история</h2>
       <div class="flex gap-4 items-center">
-        <prev-btn @click="scrollLeft" />
-        <next-btn @click="scrollRight" />
+        <prev-btn @click="scrollLeft"/>
+        <next-btn @click="scrollRight"/>
       </div>
     </div>
     <div class="relative overflow-hidden w-full">
@@ -138,6 +138,17 @@ export default {
 
 .dot.active {
   background-color: #0072ab;
+}
+
+@media (max-width : 992px) {
+  .slider-title {
+    font-size:28px;
+  }
+
+  .hide-t {
+    margin-bottom: 48px;
+  }
+
 }
 </style>
 
