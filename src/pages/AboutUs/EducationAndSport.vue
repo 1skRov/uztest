@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <div class="w-full flex gap-6" style="padding: 0 0 80px">
+  <div class="main">
     <div class="w-full p-10" style="border: 1px solid #EBEEF0; border-radius: 8px">
       <p class="font-gilroy title">Образование</p>
       <span class="text">
@@ -49,6 +49,10 @@ export default {
 </template>
 
 <style scoped>
+.main {
+  padding: 0 0 80px;
+  @apply w-full flex gap-6;
+}
 .title {
   font-weight: 500;
   font-size: 40px;
@@ -60,6 +64,9 @@ export default {
 }
 
 @media (max-width : 992px) {
+  .main {
+    padding: 0 0 48px;
+  }
   .title {
     font-size: 28px;
   }
