@@ -150,11 +150,11 @@ export default {
         width: 85%;
         @apply absolute inset-x-0 top-1/2 transform translate-y-16 mx-auto;
         h1 {
-          font-size: 20px;
+          font-size: 24px;
           line-height: 31px;
         }
         p {
-          font-size: 10px;
+          font-size: 12px;
           line-height: 21px;
           margin-top: 15px;
           margin-bottom: 15px;

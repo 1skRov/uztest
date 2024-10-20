@@ -13,7 +13,7 @@ export default {
 <template>
   <div>
     <button class="uppercase text-base flex items-center gap-6" style="color: #0072AB">
-      <div style="font-weight: 500; letter-spacing: 1.5px">{{ title }}</div>
+      <div class="title">{{ title }}</div>
       <div class="flex items-center">
         <svg width="45px" height="45px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#0072AB" transform="rotate(0)">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -28,5 +28,16 @@ export default {
 </template>
 
 <style scoped>
-
+.title {
+  font-weight: 500; letter-spacing: 1.5px
+}
+@media (max-width : 760px) {
+  .title {
+    font-size: 12px;
+  }
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
 </style>
