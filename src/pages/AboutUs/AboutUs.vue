@@ -8,6 +8,7 @@ import FamousPersons from "@/pages/AboutUs/FamousPersons.vue";
 import YouthOrganizations from "@/pages/AboutUs/YouthOrganizations.vue";
 import EducationAndSport from "@/pages/AboutUs/EducationAndSport.vue";
 import Help from "@/pages/AboutUs/Help.vue";
+import axiosInstance from '@/assets/axiosConfig.js';
 
 export default {
   name: "AboutUs",
@@ -22,6 +23,7 @@ export default {
     }
   },
   mounted() {
+    this.getData(); // Запрос к серверу для получения данных
     const observer = new IntersectionObserver(this.handleIntersection, {
       threshold: 0.3,
     });
@@ -30,6 +32,16 @@ export default {
     sectionElements.forEach((section) => observer.observe(section));
   },
   methods: {
+    getData() {
+      axiosInstance
+          .get('/documents')  // Не нужно указывать базовый URL, так как он задан в axiosConfig
+          .then(response => {
+            console.log('Полученные данные:', response.data);
+          })
+          .catch(error => {
+            console.error('Ошибка при получении данных:', error);
+          });
+    },
     handleIntersection(entries) {
       for (const entry of entries) {
         if (entry.isIntersecting) {
@@ -44,7 +56,7 @@ export default {
 
 <template>
   <div class="w-full flex relative">
-    <div style="width: 160px; height: 100%; border-right: 1px solid #EBEEF0; position: absolute; top:0" class="">
+    <div style="width: 160px; height: 100%; border-right: 1px solid #EBEEF0; position: absolute; top:0" class="hid">
       <div style="position: sticky; top:120px;">
         <ul>
           <li v-for="(section, index) in sections" :key="index" class="cursor-pointer">
@@ -56,30 +68,30 @@ export default {
     </div>
 
     <div class="w-full">
-      <div class="text-box flex-wrap" style="width:140px; position: fixed; top:140px; left: 120px; padding: 12px 24px;">
+      <div class="text-box flex-wrap hid" style="width:140px; position: fixed; top:140px; left: 120px; padding: 12px 24px;">
         {{ sections[currentSection] }}
       </div>
-      <div id="section-0" class="section mx-auto" style="width:65%;">
+      <div id="section-0" class="section mx-auto">
         <WhoWeAre></WhoWeAre>
       </div>
-      <div id="section-1" class="section mx-auto" style="width:65%;">
+      <div id="section-1" class="section hid-p mx-auto">
         <OurStory></OurStory>
       </div>
       <div class="w-full" style="background-color: #F7F8FA">
-        <div class="section mx-auto" id="section-2" style="width:65%;">
+        <div class="section mx-auto" id="section-2">
           <CultureAndTradition></CultureAndTradition>
         </div>
       </div>
-      <div id="section-3" class="section mx-auto" style="width:65%;">
+      <div id="section-3" class="section mx-auto">
         <FamousPersons/>
       </div>
-      <div id="section-4" class="section mx-auto" style="width:65%;">
+      <div id="section-4" class="section mx-auto">
         <YouthOrganizations/>
       </div>
-      <div id="section-5" class="section mx-auto" style="width:65%;">
+      <div id="section-5" class="section mx-auto">
         <EducationAndSport/>
       </div>
-      <div id="section-6" class="section mx-auto" style="width:65%;">
+      <div id="section-6" class="section mx-auto hid hid-p">
         <Help/>
       </div>
     </div>
@@ -88,6 +100,9 @@ export default {
 </template>
 
 <style scoped>
+.section {
+  width: 65%;
+}
 .circle {
   width: 25px;
   height: 25px;
@@ -135,5 +150,24 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+@media (max-width : 992px) {
+  .hid {
+    display: none;
+  }
+
+  .section {
+    width: 90%;
+  }
+}
+@media (max-width : 760px) {
+  .hid-p {
+    display: none;
+  }
+
+  .section {
+    width: 90%;
+  }
 }
 </style>

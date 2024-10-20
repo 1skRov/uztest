@@ -64,36 +64,17 @@
 </template>
 
 <script>
-
 export default {
   name: 'MainHeader',
   data() {
     return {
       lists: [
-        {
-          name:"О нас",
-          to:"/about-us"
-        },
-        {
-          name:"Регионы",
-          to:"/regions/guide"
-        },
-        {
-          name:"Документы",
-          to:"/documents"
-        },
-        {
-          name:"Пресс Центр",
-          to:"/press-center"
-        },
-        {
-          name:"Личности",
-          to:"/famous-persons"
-        },
-        {
-          name:"Контакты",
-          to:"/contacts/republic-contacts"
-        }
+        { name: "О нас", to: "/about-us" },
+        { name: "Регионы", to: "/regions/guide" },
+        { name: "Документы", to: "/documents" },
+        { name: "Пресс Центр", to: "/press-center" },
+        { name: "Личности", to: "/famous-persons" },
+        { name: "Контакты", to: "/contacts/republic-contacts" },
       ],
       address: "Дом дружбы, г.Астана, \nпр.Б. Момышулы, 24/9, офис 21",
       phone: "+7(701) 162 78-00,\n+7(701) 162 78-00."
@@ -103,18 +84,17 @@ export default {
     formattedAddress() {
       return this.address.replace(/\n/g, '<br>');
     },
-    formattedPhone(){
+    formattedPhone() {
       return this.phone.replace(/\n/g, '<br>');
     }
   },
-  methods:{
-    ReturnMainPage(){
+  methods: {
+    ReturnMainPage() {
       this.$router.push({ name: 'MainPage' });
     },
     isActive(route) {
-      // Проверяем, является ли текущий маршрут активным
       return this.$route.path === route;
-    },
+    }
   }
 }
 </script>

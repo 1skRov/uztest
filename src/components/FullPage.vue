@@ -10,17 +10,17 @@ export default {
 
 <template>
   <div class="flex flex-col h-screen w-full">
-    <header class="w-full">
-      <main-header/>
-    </header>
+<!--    <header class="w-full">-->
+<!--      <main-header/>-->
+<!--    </header>-->
     <div class="w-full flex-grow overflow-auto">
 <!--    <MainPage />-->
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
-      <footer class="w-full">
-        <FooterPage></FooterPage>
-      </footer>
+<!--      <footer class="w-full">-->
+<!--        <FooterPage></FooterPage>-->
+<!--      </footer>-->
     </div>
   </div>
 </template>

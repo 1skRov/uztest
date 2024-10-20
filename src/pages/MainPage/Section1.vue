@@ -18,12 +18,12 @@ export default {
 
 <template>
   <div class="w-full flex">
-    <div>
+    <div class="hid">
       <SideBar :page="page"/>
     </div>
     <div class="relative w-full">
       <div class="w-full flex justify-end" style="padding: 69px 0">
-      <div>
+      <div class="img1">
         <img src="@/assets/images/1.png " alt="first">
       </div>
       <div class="ml-1">
@@ -38,7 +38,7 @@ export default {
         </div>
       </div>
     </div>
-      <div class="absolute top-1/2 transform -translate-y-1/2 backdrop-blur-container" style="padding: 40px 80px; border-radius: 0 8px 8px 0; border-left: 1px solid #0072AB; overflow: hidden;">
+      <div class="absolute top-1/2 transform -translate-y-1/2 backdrop-blur-container">
         <div class="relative z-10">
           <h1 class="font-gilroy title">
             «Ассоциация этнокультурных <br>
@@ -66,6 +66,10 @@ export default {
 .backdrop-blur-container {
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
+  padding: 40px 80px;
+  border-radius: 0 8px 8px 0;
+  border-left: 1px solid #0072AB;
+  overflow: hidden;
 }
 .title {
   font-size: 40px;
@@ -82,5 +86,30 @@ export default {
   border: 1px solid #CFD3DA;
   border-radius: 6px;
   font-weight: 500;
+}
+@media (max-width : 992px) {
+  .hid{
+    display: none;
+  }
+  .title {
+    font-size: 20px;
+    line-height: 26.4px;
+  }
+
+  .description {
+    font-size: 10px;
+    line-height: 16.4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .backdrop-blur-container {
+    padding: 34px 26px;
+  }
+
+  .join {
+    @apply py-2 px-3;
+    font-size: 12px;
+  }
 }
 </style>
