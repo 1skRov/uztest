@@ -16,9 +16,9 @@ export default {
 </script>
 
 <template>
-  <div style="padding: 100px 0;">
+  <div class="main">
     <div style="margin-bottom: 56px" class="w-full flex items-center justify-between">
-      <h2 class="font-gilroy" style="font-weight: 500; font-size: 40px">
+      <h2 class="font-gilroy">
         Видео материалы
       </h2>
       <div class="flex gap-4 items-center">
@@ -36,5 +36,18 @@ export default {
 </template>
 
 <style scoped>
-
+.main {
+  padding: 100px 0;
+}
+h2 {
+  font-weight: 500; font-size: 40px
+}
+@media (max-width : 992px) {
+  .main {
+    padding: 48px 0;
+  }
+  h2 {
+    font-size: 28px;
+  }
+}
 </style>

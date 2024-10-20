@@ -16,10 +16,10 @@ export default {
         </svg>
       </div>
     </div>
-    <div class="font-gilroy" style="font-weight: 500; font-size: 24px; line-height: 28.8px; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+    <div class="font-gilroy title">
       Шавкат Мирзиёев лично поздравил с победой таэквондиста Улугбека Рашитова и боксера Хасанбоя Дусматова — видео
     </div>
-    <div class="text-base uppercase" style="letter-spacing: 3px; color:#CFD3DA; font-weight: 500">
+    <div class="time">
       Вчера 22:13
     </div>
   </div>
@@ -28,5 +28,20 @@ export default {
 <style scoped>
 .izo-item {
   background-color: #0072AB;
+}
+.title {
+  font-weight: 500; font-size: 24px; line-height: 28.8px; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
+}
+.time {
+  @apply text-base uppercase;
+  letter-spacing: 3px; color:#CFD3DA; font-weight: 500;
+}
+@media (max-width : 992px) {
+  .title {
+    font-size: 20px; line-height: 26px;
+  }
+  .time {
+    font-size: 14px;
+  }
 }
 </style>

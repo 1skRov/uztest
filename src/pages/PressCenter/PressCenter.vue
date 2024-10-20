@@ -18,21 +18,21 @@ export default {
 
 <template>
   <div class="w-full relative">
-    <div class="h-full absolute top-0 left-0">
+    <div class="h-full absolute top-0 left-0 hide">
       <SideBarText :title="title"/>
     </div>
 
     <div class="w-full">
-      <div class="section mx-auto" style="width:65%;">
+      <div class="section">
         <NewsList/>
       </div>
-      <div class="section mx-auto" style="width:65%;">
+      <div class="section">
         <VideoList/>
       </div>
-      <div class="section mx-auto" style="width:65%;">
+      <div class="section">
         <Gallery/>
       </div>
-      <div class="section mx-auto" style="width:65%;">
+      <div class="section">
         <Interview/>
       </div>
     </div>
@@ -41,5 +41,17 @@ export default {
 </template>
 
 <style scoped>
-
+.section {
+  @pply mx-auto;
+  width:65%;
+}
+@media (max-width : 992px) {
+  .hide {
+    display: none;
+  }
+  .section {
+    width: 90%;
+    @apply mx-auto;
+  }
+}
 </style>
