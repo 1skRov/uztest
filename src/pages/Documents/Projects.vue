@@ -18,14 +18,14 @@ export default {
 
 <template>
   <div class="w-full relative">
-    <div class="h-full absolute top-0 left-0">
+    <div class="h-full absolute top-0 left-0 hide">
       <SideBarText :title="title" :is-background="true"/>
     </div>
 
-    <div class="w-full" style="padding: 64px 0">
-      <div class="mx-auto" style="width:65%;">
+    <div class="w-full first">
+      <div class="second">
         <div class="flex items-center justify-between mb-14">
-          <p class="font-gilroy" style="font-weight: 500; font-size: 40px">Проекты на 2025 год</p>
+          <p class="font-gilroy">Культура и традиция</p>
           <div class="flex items-center gap-6">
             <prev-btn/>
             <next-btn/>
@@ -41,5 +41,29 @@ export default {
 </template>
 
 <style scoped>
-
+.first {
+  padding: 64px 0;
+}
+.second {
+  @apply mx-auto;
+  width: 65%;
+}
+p {
+  font-weight: 500;
+  font-size: 40px;
+}
+@media (max-width : 992px) {
+  .first {
+    padding: 24px 0 48px 0;
+  }
+  .second {
+    width: 90%;
+  }
+  .hide {
+    display: none;
+  }
+  p {
+    font-size: 28px;
+  }
+}
 </style>
