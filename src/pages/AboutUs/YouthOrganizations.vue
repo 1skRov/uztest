@@ -5,8 +5,8 @@ export default {
 </script>
 
 <template>
-  <div class="w-full" style="padding: 0 0 80px">
-    <h2 class="font-gilroy" style="font-weight: 500; font-size:40px">
+  <div class="w-full main">
+    <h2 class="font-gilroy">
       Молодежные организации
     </h2>
     <div class="flex flex-col gap-5">
@@ -47,6 +47,13 @@ export default {
 </template>
 
 <style scoped>
+.main {
+  padding: 0 0 80px;
+
+  h2 {
+    font-weight: 500; font-size:40px;
+  }
+}
 .izo {
   border-radius: 6px;
   width: 288px;
@@ -67,5 +74,20 @@ export default {
 .image-block_2 {
   height: 390px;
   @apply bg-red-200;
+}
+
+
+@media (max-width : 992px) {
+  .main {
+    padding: 0 0 48px;
+
+    h2 {
+      font-size:28px
+    }
+
+    button {
+      display: none;
+    }
+  }
 }
 </style>

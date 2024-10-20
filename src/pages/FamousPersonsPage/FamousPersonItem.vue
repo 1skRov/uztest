@@ -16,9 +16,9 @@ export default {
   </div>
   <div style="padding: 0 60px" class="flex items-center w-full">
     <div>
-      <p class="font-gilroy" style="font-weight: 500; font-size: 32px; line-height: 38px">Пулатов Шерзод Аббозович</p>
+      <p class="font-gilroy">Пулатов Шерзод Аббозович</p>
       <span class="text-lg" style="color:#575F6C">Председатель, член АНК, член НЭС АНК</span>
-      <div class="mt-6">
+      <div class="mt-6 hide">
         <button @click="PersonDetail" class="uppercase font-medium text-base py-2.5 px-4 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">подробнее</button>
       </div>
     </div>
@@ -27,5 +27,21 @@ export default {
 </template>
 
 <style scoped>
+p {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 38px;
+}
+@media (max-width : 992px) {
+  .hide {
+    display: none;
+  }
+  p {
+    font-size: 28px;
+  }
 
+  span {
+    font-size: 14px;
+  }
+}
 </style>
