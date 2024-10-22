@@ -49,10 +49,9 @@ export default {
 }
 .content {
   @apply w-full;
-  padding-left: 188px;
 }
 .content-in {
-  @apply py-16 border-0 border-t border-solid border-gray-200;
+  @apply py-16 border-0 border-t border-solid border-gray-200 mx-auto;
   width: 75%;
   h2 {
     font-size: 40px;

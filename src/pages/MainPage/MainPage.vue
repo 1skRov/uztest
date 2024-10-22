@@ -21,6 +21,9 @@ export default {
 <template>
   <div class="w-full">
     <Section1 />
+    <div class="tablet">
+      <Section3 />
+    </div>
     <Section2 />
     <div class="mobile">
       <Section3 />
@@ -32,9 +35,15 @@ export default {
 </template>
 
 <style scoped>
+.tablet {
+  display: none;
+}
 @media (max-width : 760px) {
   .mobile {
     display: none;
+  }
+  .tablet {
+    display: flex;
   }
 }
 </style>
