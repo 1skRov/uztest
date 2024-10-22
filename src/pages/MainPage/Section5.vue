@@ -20,7 +20,10 @@ export default {
     </div>
     <div class="content">
       <div style="" class="content-title">
-        <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
+        <div>
+          <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
+        </div>
         <router-link to="/regions/guide" class="btn">
           <moreDetail :title="title"/>
         </router-link>
@@ -31,6 +34,9 @@ export default {
         </div>
         <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full" style="fill: none">
       </div>
+      <router-link to="/regions/guide" class="btn-has">
+        <moreDetail :title="title"/>
+      </router-link>
     </div>
   </div>
 </template>
@@ -50,12 +56,15 @@ export default {
       line-height: 52px;
       font-weight: 500;
     }
+    p {
+      display: none;
+    }
   }
   .content-body {
     @apply w-full;
     p {
       @apply text-sm;
-      color: #575F6C
+      color: #575F6C;
     }
   }
 }
@@ -74,6 +83,9 @@ export default {
       h2 {
         font-size: 24px;
       }
+      p {
+        display: none;
+      }
     }
     .content-body {
       @apply w-full;
@@ -84,5 +96,38 @@ export default {
   }
 }
 @media (max-width : 760px) {
+  .content {
+    @apply mx-auto;
+    padding: 32px 0;
+    width: 90%;
+
+    .content-title {
+      padding-bottom: 12px;
+
+      h2 {
+        font-size: 22px;
+        line-height: 26px;
+        padding-bottom: 12px;
+      }
+      p {
+        display: block;
+        font-size: 12px;
+        color: #575F6C;
+      }
+      .btn {
+        display: none;
+      }
+    }
+    .content-body {
+      @apply w-full;
+      p {
+        display: none;
+      }
+    }
+    .btn-has {
+      margin-top: 32px;
+      display: block;
+    }
+  }
 }
 </style>
