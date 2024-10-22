@@ -22,7 +22,9 @@ export default {
   <div class="w-full">
     <Section1 />
     <Section2 />
-    <Section3 />
+    <div class="mobile">
+      <Section3 />
+    </div>
     <Section4/>
     <Section5 />
     <Section6 />
@@ -30,5 +32,9 @@ export default {
 </template>
 
 <style scoped>
-
+@media (max-width : 760px) {
+  .mobile {
+    display: none;
+  }
+}
 </style>

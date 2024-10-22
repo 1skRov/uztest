@@ -39,17 +39,19 @@ export default {
 
 <template>
 <div class="w-full flex">
-  <div v-if="hasSidebar">
+  <div v-if="hasSidebar" class="hide">
     <SideBar :page="page" :icon="false"/>
   </div>
-  <div class="w-full" style="padding: 64px 0 64px 188px;">
-    <div style="width: 1224px; padding-bottom: 56px" class="flex justify-between">
-      <h2 class="font-gilroy" style="font-size: 40px; line-height: 52px; font-weight: 500">Известные личности</h2>
-      <router-link to="/famous-persons">
-        <moreDetail :title="title"/>
-      </router-link>
+  <div class="main" style="">
+    <div class="content-f">
+      <h2 class="font-gilroy">Известные личности</h2>
+      <div class="mobile">
+        <router-link to="/famous-persons">
+          <moreDetail :title="title"/>
+        </router-link>
+      </div>
     </div>
-    <div class="flex justify-between relative" style="width: 1224px">
+    <div class="content">
         <div v-for="i in items" :key="i.id" class="izo relative overflow-hidden group">
           <div>
             <img src="@/assets/images/img_1.png" alt="" style="width: 100%; height: 100%">
@@ -62,11 +64,32 @@ export default {
           </div>
         </div>
     </div>
+    <div class="mobile-has">
+      <router-link to="/famous-persons">
+        <moreDetail :title="title"/>
+      </router-link>
+    </div>
   </div>
 </div>
 </template>
 
 <style scoped>
+.main {
+  padding: 64px 0 64px 188px;
+  @apply w-full;
+}
+.content {
+  @apply flex justify-between relative;
+  width: 65%;
+}
+.content-f {
+  @apply flex justify-between;
+  width: 65%;
+  padding-bottom: 56px;
+  h2 {
+    font-size: 40px; line-height: 52px; font-weight: 500;
+  }
+}
 .izo {
   border-radius: 6px;
   width: 288px;
@@ -77,4 +100,37 @@ export default {
     background-color: #0072AB;
   }
 }
+.mobile-has {
+  display:none;
+}
+@media (max-width : 992px) {
+  .hide {
+    display: none;
+  }
+
+}
+@media (max-width : 760px) {
+  .mobile-has {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+  .main {
+    padding: 32px 0;
+  }
+  .content {
+    width: 90%;
+    @apply mx-auto;
+  }
+  .content-f {
+    width: 90%;
+    @apply mx-auto;
+    padding-bottom: 24px;
+    h2 {
+      font-size: 24px;
+    }
+  }
+}
+
 </style>
