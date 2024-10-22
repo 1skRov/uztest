@@ -40,4 +40,13 @@ export default {
     height: 32px;
   }
 }
+@media (max-width : 992px) {
+  .title {
+    font-size: 14px;
+  }
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
 </style>
