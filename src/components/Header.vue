@@ -1,8 +1,47 @@
+<script>
+export default {
+  name: 'MainHeader',
+  data() {
+    return {
+      lists: [
+        { name: "О нас", to: "/about-us" },
+        { name: "Регионы", to: "/regions/guide" },
+        { name: "Документы", to: "/documents" },
+        { name: "Пресс Центр", to: "/press-center" },
+        { name: "Личности", to: "/famous-persons" },
+        { name: "Контакты", to: "/contacts/republic-contacts" },
+      ],
+      address: "Дом дружбы, г.Астана, \nпр.Б. Момышулы, 24/9, офис 21",
+      phone: "+7(701) 162 78-00,\n+7(701) 162 78-00.",
+      isSidebarActive: false,
+    }
+  },
+  computed: {
+    formattedAddress() {
+      return this.address.replace(/\n/g, '<br>');
+    },
+    formattedPhone() {
+      return this.phone.replace(/\n/g, '<br>');
+    }
+  },
+  methods: {
+    ReturnMainPage() {
+      this.$router.push({ name: 'MainPage' });
+    },
+    isActive(route) {
+      return this.$route.path === route;
+    },
+    toggleSidebar() {
+      this.isSidebarActive = !this.isSidebarActive;
+    },
+  }
+}
+</script>
 <template>
   <header class="header">
     <div class="w-full flex justify-between">
       <!--      icon-->
-      <div @click="ReturnMainPage" class="cursor-pointer">
+      <div @click="ReturnMainPage" class="cursor-pointer icon">
         <svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0H160V80H0V0Z" fill="#0072AB"/>
           <path d="M28.744 48.16C27.576 48.16 26.568 48 25.72 47.68C24.872 47.344 24.168 46.888 23.608 46.312C23.064 45.72 22.656 45.024 22.384 44.224C22.128 43.408 22 42.512 22 41.536V31.192H25.744V41.224C25.744 41.896 25.816 42.472 25.96 42.952C26.12 43.416 26.328 43.8 26.584 44.104C26.856 44.392 27.176 44.6 27.544 44.728C27.928 44.856 28.344 44.92 28.792 44.92C29.704 44.92 30.44 44.64 31 44.08C31.576 43.52 31.864 42.568 31.864 41.224V31.192H35.608V41.536C35.608 42.512 35.472 43.408 35.2 44.224C34.928 45.04 34.512 45.744 33.952 46.336C33.392 46.912 32.68 47.36 31.816 47.68C30.952 48 29.928 48.16 28.744 48.16Z" fill="white"/>
@@ -16,7 +55,7 @@
         </svg>
       </div>
       <!--      menu-->
-      <div class="mx-auto flex items-center">
+      <div class="menu">
         <ul class="flex items-center gap-10">
           <li v-for="(list, id) in lists" :key="id" class="menu-item">
             <router-link :to="list.to" :class="{ active: isActive(list.to) }">{{list.name}}</router-link>
@@ -24,7 +63,7 @@
         </ul>
       </div>
       <!--      address-->
-      <div class="flex gap-10 mx-auto">
+      <div class="flex gap-10 mx-auto addr">
         <div class="flex gap-4 items-center">
           <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.6663 2.67969C11.525 2.67969 7.34338 6.86388 7.34338 12.0052C7.34338 17.9825 15.299 27.6922 15.6377 28.1016L16.6663 29.349L17.6949 28.1016C18.0336 27.6909 25.9892 17.9825 25.9892 12.0052C25.9892 6.86254 21.8076 2.67969 16.6663 2.67969ZM16.6663 5.34635C20.337 5.34635 23.3226 8.33454 23.3226 12.0052C23.3225 15.6119 19.1703 21.8149 16.6663 25.1016C14.1623 21.8176 10.0101 15.6172 10.0101 12.0052C10.0101 8.33454 12.9956 5.34635 16.6663 5.34635ZM16.6663 8.66667C14.825 8.66667 13.333 10.1587 13.333 12C13.333 13.8413 14.825 15.3333 16.6663 15.3333C18.5076 15.3333 19.9996 13.8413 19.9996 12C19.9996 10.1587 18.5076 8.66667 16.6663 8.66667Z" fill="#CFD3DA"/>
@@ -46,7 +85,35 @@
         </div>
       </div>
       <!--      local-->
-      <div class="flex">
+      <div class="flex local">
+        <div class="flex gap-2.5 items-center pl-4 pr-5" style="border-left: 1px solid #EBEEF0">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.0003 2.66663C8.64833 2.66663 2.66699 8.64796 2.66699 16C2.66699 23.352 8.64833 29.3333 16.0003 29.3333C23.3523 29.3333 29.3337 23.352 29.3337 16C29.3337 8.64796 23.3523 2.66663 16.0003 2.66663ZM25.2243 10.6666H22.151C21.8217 9.06796 21.3443 7.64663 20.7483 6.46129C22.619 7.39729 24.1763 8.86396 25.2243 10.6666ZM26.667 16C26.667 16.9226 26.5377 17.812 26.3163 18.6666H22.543C22.623 17.8093 22.667 16.9186 22.667 16C22.667 15.0813 22.623 14.1906 22.543 13.3333H26.3163C26.5377 14.188 26.667 15.0773 26.667 16ZM16.0003 26.6666C14.8763 26.6666 13.4017 24.692 12.5937 21.3333H19.4057C18.599 24.692 17.1243 26.6666 16.0003 26.6666ZM12.1443 18.6666C12.055 17.828 12.0003 16.9426 12.0003 16C12.0003 15.0573 12.055 14.172 12.1443 13.3333H19.8563C19.9457 14.172 20.0003 15.0573 20.0003 16C20.0003 16.9426 19.9457 17.828 19.8563 18.6666H12.1443ZM5.33366 16C5.33366 15.0773 5.46299 14.188 5.68433 13.3333H9.45766C9.37766 14.1906 9.33366 15.0813 9.33366 16C9.33366 16.9186 9.37766 17.8093 9.45766 18.6666H5.68433C5.46299 17.812 5.33366 16.9226 5.33366 16ZM16.0003 5.33329C17.1243 5.33329 18.599 7.30796 19.407 10.6666H12.5937C13.4017 7.30796 14.8763 5.33329 16.0003 5.33329ZM11.2537 6.46129C10.6577 7.64663 10.1803 9.06796 9.85099 10.6666H6.77632C7.82433 8.86396 9.38166 7.39729 11.2537 6.46129ZM6.77632 21.3333H9.84966C10.179 22.932 10.6563 24.3533 11.2523 25.5386C9.38166 24.6026 7.82433 23.136 6.77632 21.3333ZM20.747 25.5386C21.343 24.3533 21.819 22.932 22.1497 21.3333H25.223C24.1763 23.136 22.619 24.6026 20.747 25.5386Z" fill="#0072AB" fill-opacity="0.3"/>
+          </svg>
+          <p class="text-sm uppercase">Рус</p>
+        </div>
+        <div class="flex items-center px-5" style="border-left: 1px solid #EBEEF0">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.33366 5.33337C3.86033 5.33337 2.66699 6.52671 2.66699 8.00004V24C2.66699 25.4734 3.86033 26.6667 5.33366 26.6667H26.667C28.1403 26.6667 29.3337 25.4734 29.3337 24V8.00004C29.3337 6.52671 28.1403 5.33337 26.667 5.33337H5.33366ZM5.33366 8.00004H26.667V9.33598L16.0003 16L5.33366 9.33598V8.00004ZM5.33366 12.0026L16.0003 18.6667L26.667 12.0026V24H5.33366V12.0026Z" fill="#333333"/>
+          </svg>
+        </div>
+      </div>
+      <div class="flex items-center px-5" style="border-left: 1px solid #EBEEF0">
+        <button @click="toggleSidebar" class="menu-button">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="#333" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-overlay" v-if="isSidebarActive" @click="toggleSidebar"></div>
+    <div class="sidebar" :class="{ active: isSidebarActive }">
+      <ul>
+        <li v-for="(list, id) in lists" :key="id">
+          <router-link :to="list.to" @click.native="toggleSidebar">{{ list.name }}</router-link>
+        </li>
+      </ul>
+      <div class="flex mob">
         <div class="flex gap-2.5 items-center pl-4 pr-5" style="border-left: 1px solid #EBEEF0">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.0003 2.66663C8.64833 2.66663 2.66699 8.64796 2.66699 16C2.66699 23.352 8.64833 29.3333 16.0003 29.3333C23.3523 29.3333 29.3337 23.352 29.3337 16C29.3337 8.64796 23.3523 2.66663 16.0003 2.66663ZM25.2243 10.6666H22.151C21.8217 9.06796 21.3443 7.64663 20.7483 6.46129C22.619 7.39729 24.1763 8.86396 25.2243 10.6666ZM26.667 16C26.667 16.9226 26.5377 17.812 26.3163 18.6666H22.543C22.623 17.8093 22.667 16.9186 22.667 16C22.667 15.0813 22.623 14.1906 22.543 13.3333H26.3163C26.5377 14.188 26.667 15.0773 26.667 16ZM16.0003 26.6666C14.8763 26.6666 13.4017 24.692 12.5937 21.3333H19.4057C18.599 24.692 17.1243 26.6666 16.0003 26.6666ZM12.1443 18.6666C12.055 17.828 12.0003 16.9426 12.0003 16C12.0003 15.0573 12.055 14.172 12.1443 13.3333H19.8563C19.9457 14.172 20.0003 15.0573 20.0003 16C20.0003 16.9426 19.9457 17.828 19.8563 18.6666H12.1443ZM5.33366 16C5.33366 15.0773 5.46299 14.188 5.68433 13.3333H9.45766C9.37766 14.1906 9.33366 15.0813 9.33366 16C9.33366 16.9186 9.37766 17.8093 9.45766 18.6666H5.68433C5.46299 17.812 5.33366 16.9226 5.33366 16ZM16.0003 5.33329C17.1243 5.33329 18.599 7.30796 19.407 10.6666H12.5937C13.4017 7.30796 14.8763 5.33329 16.0003 5.33329ZM11.2537 6.46129C10.6577 7.64663 10.1803 9.06796 9.85099 10.6666H6.77632C7.82433 8.86396 9.38166 7.39729 11.2537 6.46129ZM6.77632 21.3333H9.84966C10.179 22.932 10.6563 24.3533 11.2523 25.5386C9.38166 24.6026 7.82433 23.136 6.77632 21.3333ZM20.747 25.5386C21.343 24.3533 21.819 22.932 22.1497 21.3333H25.223C24.1763 23.136 22.619 24.6026 20.747 25.5386Z" fill="#0072AB" fill-opacity="0.3"/>
@@ -63,50 +130,88 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: 'MainHeader',
-  data() {
-    return {
-      lists: [
-        { name: "О нас", to: "/about-us" },
-        { name: "Регионы", to: "/regions/guide" },
-        { name: "Документы", to: "/documents" },
-        { name: "Пресс Центр", to: "/press-center" },
-        { name: "Личности", to: "/famous-persons" },
-        { name: "Контакты", to: "/contacts/republic-contacts" },
-      ],
-      address: "Дом дружбы, г.Астана, \nпр.Б. Момышулы, 24/9, офис 21",
-      phone: "+7(701) 162 78-00,\n+7(701) 162 78-00."
-    }
-  },
-  computed: {
-    formattedAddress() {
-      return this.address.replace(/\n/g, '<br>');
-    },
-    formattedPhone() {
-      return this.phone.replace(/\n/g, '<br>');
-    }
-  },
-  methods: {
-    ReturnMainPage() {
-      this.$router.push({ name: 'MainPage' });
-    },
-    isActive(route) {
-      return this.$route.path === route;
-    }
-  }
-}
-</script>
-
 <style scoped>
+.menu {
+  @apply mx-auto flex items-center;
+}
+
 .header {
   width: 100%;
   border-bottom: 1px solid #EBEEF0;
   background-color: white;
 }
 .menu-item a.active {
-  color: #0072AB; /* цвет активного элемента */
-  font-weight: bold; /* можно добавить и другие стили */
+  color: #0072AB;
+  font-weight: bold;
+}
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: none;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Изначально скрыта за правым краем */
+  width: 250px;
+  height: 100%;
+  background-color: white;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.sidebar.active {
+  right: 0; /* Когда активна, сдвигается в видимую область */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+@media (max-width : 992px) {
+  .menu-button {
+    display: block;
+  }
+  .menu {
+    display: none;
+  }
+  .icon > svg{
+    width: 100px;
+    height: 50px;
+  }
+  .mob {
+    display: none;
+  }
+}
+@media (max-width : 760px) {
+  .mob {
+    display: flex;
+  }
+  .addr, .local {
+    display: none;
+  }
 }
 </style>
