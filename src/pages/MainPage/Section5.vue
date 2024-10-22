@@ -15,25 +15,74 @@ export default {
 
 <template>
   <div class="w-full flex">
-    <div>
+    <div class="hide">
       <SideBar :page="page"/>
     </div>
-    <div class="w-full" style="padding: 80px 0 80px 188px;">
-      <div style="width: 1224px; padding-bottom: 40px" class="flex justify-between">
-        <h2 class="font-gilroy" style="font-size: 40px; line-height: 52px; font-weight: 500">Этнокультурный центр узбеков Казахстана</h2>
-        <router-link to="/regions/guide">
+    <div class="content">
+      <div style="" class="content-title">
+        <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
+        <router-link to="/regions/guide" class="btn">
           <moreDetail :title="title"/>
         </router-link>
       </div>
-      <div class="relative bg-blue-50" style="width: 1224px; height: 940px">
+      <div class="content-body relative">
         <div class="absolute top-0 left-0">
-          <p class="text-sm" style="color: #575F6C">Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
         </div>
+        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full" style="fill: none">
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.content {
+  @apply mx-auto;
+  padding: 80px 0;
+  width: 75%;
 
+  .content-title {
+    @apply flex justify-between items-center w-full;
+    padding-bottom: 40px;
+
+    h2 {
+      font-size: 40px;
+      line-height: 52px;
+      font-weight: 500;
+    }
+  }
+  .content-body {
+    @apply w-full;
+    p {
+      @apply text-sm;
+      color: #575F6C
+    }
+  }
+}
+@media (max-width : 992px) {
+  .hide {
+    display: none;
+  }
+  .content {
+    @apply mx-auto;
+    padding: 48px 0;
+    width: 90%;
+
+    .content-title {
+      padding-bottom: 32px;
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+    .content-body {
+      @apply w-full;
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+@media (max-width : 760px) {
+}
 </style>
