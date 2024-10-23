@@ -2,17 +2,51 @@
 import MainHeader from "@/components/Header.vue";
 import FooterPage from "@/components/Footer.vue";
 import MainPage from "@/pages/MainPage/MainPage.vue";
+import axiosInstance from "@/assets/axiosConfig";
 
 export default {
   name: "MemberAssociation",
   components: {MainPage, FooterPage, MainHeader},
+  data() {
+    return {
+      formData: {
+        name: '',
+        date_birth: '',
+        iin: '',
+        phone: '',
+      },
+    };
+  },
+  mounted() {
+    // Получаем CSRF-токен при загрузке компонента
+    axiosInstance.get('get-csrf-token/')
+        .then(response => {
+          console.log('CSRF-токен получен и установлен в cookie');
+        })
+        .catch(error => {
+          console.error('Ошибка при получении CSRF-токена:', error);
+        });
+  },
   methods: {
     closeModal() {
       this.$router.push('/')
     },
+    submitForm() {
+      axiosInstance.post('', this.formData)
+          .then(response => {
+            console.log('Данные успешно отправлены:', response.data);
+            // Можно добавить уведомление пользователю о успешной отправке
+            this.closeModal();
+          })
+          .catch(error => {
+            console.error('Ошибка при отправке данных:', error.response.data);
+            // Можно добавить уведомление пользователю об ошибке
+          });
+    },
   },
 }
 </script>
+
 
 <template>
   <div class="flex flex-col h-screen w-full">
@@ -32,31 +66,37 @@ export default {
           Заполните все формы ниже, и отправьте заявку.
         </p>
         <div class="mt-8">
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-4" @submit.prevent="submitForm">
             <!-- ФИО -->
             <div>
               <label class="label" for="name">ВАШЕ ФИО:</label>
-              <input type="text" id="name" class="w-full border border-gray-300 rounded p-2 bg-white" value="ПУЛАТОВ ШЕРЗОД АББОЗОВИЧ" readonly>
+              <input type="text" id="name" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.name" required>
             </div>
 
             <!-- Дата Рождения -->
             <div>
-              <label class="label" for="dob">ДАТА РОЖДЕНИЯ:</label>
-              <input type="text" id="dob" class="w-full border border-gray-300 rounded p-2 bg-white" value="20.10.1000" readonly>
+              <label class="label" for="date_birth">ДАТА РОЖДЕНИЯ:</label>
+              <input type="date" id="date_birth" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.date_birth" required>
             </div>
 
             <!-- ИИН -->
             <div>
               <label class="label" for="iin">ВАШ ИИН:</label>
-              <input type="text" id="iin" class="w-full border border-gray-300 rounded p-2 bg-white" value="2314123123123" readonly>
+              <input type="text" id="iin" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.iin" required>
             </div>
 
             <!-- Телефон -->
             <div>
               <label class="label" for="phone">ВАШ ТЕЛЕФОН НОМЕР:</label>
-              <input type="text" id="phone" class="w-full border border-gray-300 rounded p-2 bg-white" value="+77777777" readonly>
+              <input type="text" id="phone" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.phone" required>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <div class="col-span-2">
+              <button type="submit" class="btn btn-primary">Отправить</button>
             </div>
           </form>
+
         </div>
       </div>
     </div>
