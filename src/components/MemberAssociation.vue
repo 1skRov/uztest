@@ -3,7 +3,9 @@ import MainHeader from "@/components/Header.vue";
 import FooterPage from "@/components/Footer.vue";
 import MainPage from "@/pages/MainPage/MainPage.vue";
 import axiosInstance from "@/assets/axiosConfig";
+import { useAuthStore } from '@/store/auth.js'
 
+// const authStore = useAuthStore();
 export default {
   name: "MemberAssociation",
   components: {MainPage, FooterPage, MainHeader},
@@ -17,31 +19,20 @@ export default {
       },
     };
   },
-  mounted() {
-    // Получаем CSRF-токен при загрузке компонента
-    axiosInstance.get('get-csrf-token/')
-        .then(response => {
-          console.log('CSRF-токен получен и установлен в cookie');
-        })
-        .catch(error => {
-          console.error('Ошибка при получении CSRF-токена:', error);
-        });
-  },
   methods: {
     closeModal() {
       this.$router.push('/')
     },
-    submitForm() {
-      axiosInstance.post('', this.formData)
-          .then(response => {
-            console.log('Данные успешно отправлены:', response.data);
-            // Можно добавить уведомление пользователю о успешной отправке
-            this.closeModal();
-          })
-          .catch(error => {
-            console.error('Ошибка при отправке данных:', error.response.data);
-            // Можно добавить уведомление пользователю об ошибке
-          });
+    async login(){
+      try {
+        await this.useAuthStore.login(this.formData.name, this.formData.iin, this.formData.date_birth, this.formData.phone)
+        if (!this.useAuthStore.isAuthenticated) {
+          this.error = 'Login failed. Please check your credentials.'
+        }
+      } catch (error) {
+        console.error('Login error:', error)
+        this.error = 'An error occurred during login.'
+      }
     },
   },
 }
@@ -66,7 +57,7 @@ export default {
           Заполните все формы ниже, и отправьте заявку.
         </p>
         <div class="mt-8">
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-4" @submit.prevent="submitForm">
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-4" @submit.prevent="login">
             <!-- ФИО -->
             <div>
               <label class="label" for="name">ВАШЕ ФИО:</label>
@@ -93,7 +84,7 @@ export default {
 
             <!-- Кнопка отправки -->
             <div class="col-span-2">
-              <button type="submit" class="btn btn-primary">Отправить</button>
+              <button type="submit" class="btn btn-primary" @click="login">Отправить</button>
             </div>
           </form>
 

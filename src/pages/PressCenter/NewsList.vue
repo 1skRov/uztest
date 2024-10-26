@@ -27,8 +27,8 @@ export default {
 </script>
 
 <template>
-  <div class="main">
-    <div style="margin-bottom: 56px" class="w-full flex items-center justify-between">
+  <div>
+    <div class="title">
       <h2 class="font-gilroy">
         Последние новости
       </h2>
@@ -37,7 +37,7 @@ export default {
         <next-btn/>
       </div>
     </div>
-    <div style="grid-template-columns: repeat(3, 1fr);display: grid" class="gap-y-8 gap-x-6">
+    <div style="grid-template-columns: repeat(3, 1fr);display: grid" class="gap-y-2 gap-x-6">
       <div v-for="n in news" :key="n.id" class="cursor-pointer" @click="goToNewsDetail(n.id)">
         <NewsItem :title="n.title"/>
       </div>
@@ -46,18 +46,19 @@ export default {
 </template>
 
 <style scoped>
-.main {
-  padding: 80px 0 0 0;
-}
-h2 {
-  font-weight: 500; font-size: 40px
+.title {
+  @apply w-full flex items-center justify-between;
+  margin-bottom: 56px;
+  h2 {
+    font-weight: 500; font-size: 40px
+  }
 }
 @media (max-width : 992px) {
-  .main {
-    padding: 48px 0;
-  }
-  h2 {
-    font-size: 28px;
+  .title {
+    margin-bottom: 48px;
+    h2 {
+      font-size: 28px;
+    }
   }
 }
 </style>

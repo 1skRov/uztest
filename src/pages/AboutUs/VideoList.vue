@@ -16,8 +16,8 @@ export default {
 </script>
 
 <template>
-  <div class="main">
-    <div style="margin-bottom: 56px" class="w-full flex items-center justify-between">
+  <div>
+    <div class="title">
       <h2 class="font-gilroy">
         Видео материалы
       </h2>
@@ -26,9 +26,8 @@ export default {
         <next-btn/>
       </div>
     </div>
-<!--    <div style="grid-template-columns: repeat(3, 1fr);display: grid;gap: 24px;">-->
-    <div class="grid grid-cols-3 gap-6" style="">
-      <div v-for="n in video" :key="n.id" class="">
+    <div class="grid grid-cols-3 gap-6">
+      <div v-for="n in video" :key="n.id">
         <VideoMaterial />
       </div>
     </div>
@@ -36,18 +35,20 @@ export default {
 </template>
 
 <style scoped>
-.main {
-  padding: 100px 0;
-}
-h2 {
-  font-weight: 500; font-size: 40px
+.title {
+  @apply w-full flex items-center justify-between;
+  margin-bottom: 56px;
+  h2 {
+    font-weight: 500;
+    font-size: 40px
+  }
 }
 @media (max-width : 992px) {
-  .main {
-    padding: 48px 0;
-  }
-  h2 {
-    font-size: 28px;
+  .title {
+    margin-bottom: 48px;
+    h2 {
+      font-size: 28px;
+    }
   }
 }
 </style>

@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 group">
+  <div class="main">
     <div class="relative rounded overflow-hidden">
       <img src="@/assets/images/img_3.png" alt="" class="w-full h-full">
       <div class="izo-item absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
@@ -26,22 +26,39 @@ export default {
 </template>
 
 <style scoped>
+.main {
+  @apply flex flex-col gap-6;
+  .title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28.8px;
+  }
+  .time {
+    @apply text-base uppercase;
+    letter-spacing: 3px;
+    color:#CFD3DA;
+    font-weight: 500;
+  }
+}
 .izo-item {
   background-color: #0072AB;
 }
-.title {
-  font-weight: 500; font-size: 24px; line-height: 28.8px; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;
-}
-.time {
-  @apply text-base uppercase;
-  letter-spacing: 3px; color:#CFD3DA; font-weight: 500;
-}
 @media (max-width : 992px) {
-  .title {
-    font-size: 20px; line-height: 26px;
-  }
-  .time {
-    font-size: 14px;
+  .main {
+    @apply gap-4;
+    .title {
+      font-size: 16px;
+      line-height: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .time {
+      font-size: 12px;
+    }
   }
 }
 </style>

@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-<div class="flex flex-col gap-6">
+<div class="main">
   <div>
     <img src="@/assets/images/img_3.png" alt="" class="rounded w-full h-full">
   </div>
@@ -19,19 +19,31 @@ export default {
 </template>
 
 <style scoped>
-.title {
-  font-weight: 500; font-size: 24px; line-height: 28.8px;
-}
-.time {
-  @apply text-base uppercase;
-  letter-spacing: 3px; color:#CFD3DA; font-weight: 500;
-}
-@media (max-width : 992px) {
+.main {
+  @apply flex flex-col gap-6;
   .title {
-     font-size: 20px; line-height: 26px;
+    font-weight: 500; font-size: 24px; line-height: 28.8px;
   }
   .time {
-    font-size: 14px;
+    @apply text-base uppercase;
+    letter-spacing: 3px; color:#CFD3DA; font-weight: 500;
+  }
+}
+@media (max-width : 992px) {
+  .main {
+    @apply gap-4;
+    .title {
+      font-size: 16px;
+      line-height: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .time {
+      font-size: 12px;
+    }
   }
 }
 </style>

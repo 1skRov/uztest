@@ -15,15 +15,15 @@ export default {
 </script>
 
 <template>
-  <div style="padding: 0 0 80px 0" class="flex">
+  <div class="flex justify-between gap-6">
     <div class="w-full">
-      <h2 class="font-gilroy mb-6" style="font-weight: 500; font-size: 40px">
+      <h2 class="font-gilroy title">
         Интервью
       </h2>
-      <p style="color:#575F6C" class="mb-6 leading-8">
+      <p class="descriptions">
         Благотворительные инициативы общества собирают с каждым разом всё больше участников, которые приносят лекарства, одежду, продукты, игрушки. Эти простые вещи обладают добавочной ценностью — они несут в себе тепло, заботу и стремление облегчить и украсить жизнь людей, находящихся в трудной жизненной ситуации.
       </p>
-      <span style="color:#575F6C; font-style: italic">
+      <span class="author">
         Пулатов Шерзод Аббозович
       </span>
       <div class="flex gap-4 items-center justify-between mt-10">
@@ -34,12 +34,36 @@ export default {
         </div>
       </div>
     </div>
-    <div class="w-full h-full overflow-hidden" style="margin-left: 188px; border-radius: 8px">
+    <div class="w-full flex flex-shrink" style="border-radius: 8px">
       <img src="@/assets/images/img_4.png" alt="" class="w-full">
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.title {
+  @apply mb-6;
+  font-weight: 500;
+  font-size: 40px
+}
+.descriptions {
+  @aply mb-6 leading-8;
+  color:#575F6C;
+}
+.author {
+  color:#575F6C;
+  font-style: italic;
+}
+@media (max-width : 992px) {
+  .title {
+    font-size: 28px
+  }
+  .descriptions {
+    font-size: 14px;
+    line-height: 28px;
+  }
+  .author {
+    font-size: 14px;
+  }
+}
 </style>

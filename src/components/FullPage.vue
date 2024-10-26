@@ -1,20 +1,18 @@
 <script>
-import MainPage from "@/pages/MainPage/MainPage.vue"
 import MainHeader from "@/components/Header.vue";
 import FooterPage from "@/components/Footer.vue";
 export default {
   name: "FullPage",
-  components: {FooterPage, MainHeader, MainPage}
+  components: {FooterPage, MainHeader}
 }
 </script>
 
 <template>
   <div class="flex flex-col h-screen w-full">
-<!--    <header class="w-full">-->
-<!--      <main-header/>-->
-<!--    </header>-->
+    <header class="w-full">
+      <main-header/>
+    </header>
     <div class="w-full flex-grow overflow-auto">
-<!--    <MainPage />-->
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>

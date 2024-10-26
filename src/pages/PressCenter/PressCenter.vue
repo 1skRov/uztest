@@ -4,10 +4,11 @@ import NewsList from "@/pages/PressCenter/NewsList.vue";
 import VideoList from "@/pages/AboutUs/VideoList.vue";
 import Gallery from "@/pages/PressCenter/Gallery.vue";
 import Interview from "@/pages/PressCenter/Interview.vue";
+import Help from "@/pages/AboutUs/Help.vue";
 
 export default {
   name: "PressCenter",
-  components: {Interview, Gallery, VideoList, NewsList, SideBarText},
+  components: {Help, Interview, Gallery, VideoList, NewsList, SideBarText},
   data(){
     return {
       title:"ПРЕСС ЦЕНТР",
@@ -35,6 +36,9 @@ export default {
       <div class="section">
         <Interview/>
       </div>
+      <div class="section">
+        <Help/>
+      </div>
     </div>
     <router-view></router-view>
   </div>
@@ -50,6 +54,7 @@ export default {
     display: none;
   }
   .section {
+    padding: 48px 0;
     width: 90%;
     @apply mx-auto;
   }

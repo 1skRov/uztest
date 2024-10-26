@@ -16,9 +16,9 @@ export default {
 </script>
 
 <template>
-  <div style="padding: 0 0 100px 0;">
-    <div style="margin-bottom: 56px" class="w-full flex items-center justify-between">
-      <h2 class="font-gilroy" style="font-weight: 500; font-size: 40px">
+  <div>
+    <div class="title">
+      <h2 class="font-gilroy">
         Фотогалерея
       </h2>
       <div class="flex gap-4 items-center">
@@ -26,8 +26,8 @@ export default {
         <next-btn/>
       </div>
     </div>
-    <div style="grid-template-columns: repeat(3, 1fr);display: grid" class="gap-y-8 gap-x-6">
-      <div v-for="n in photo" :key="n.id" class="">
+    <div class="grup">
+      <div v-for="n in photo" :key="n.id">
         <GalleryItem />
       </div>
     </div>
@@ -35,5 +35,29 @@ export default {
 </template>
 
 <style scoped>
-
+.title {
+  margin-bottom: 56px;
+  @apply w-full flex items-center justify-between;
+  h2 {
+    font-weight: 500;
+    font-size: 40px;
+  }
+}
+.grup {
+  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  @apply gap-y-8 gap-x-6;
+}
+@media (max-width : 992px) {
+  .title {
+    margin-bottom: 48px;
+    h2 {
+      font-size: 28px;
+    }
+  }
+  .grup {
+    display: flex;
+    overflow: hidden;
+  }
+}
 </style>

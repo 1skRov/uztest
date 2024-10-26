@@ -77,7 +77,10 @@ export default {
       <div id="section-1" class="section hid-p mx-auto">
         <OurStory></OurStory>
       </div>
-      <div class="w-full" style="background-color: #F7F8FA">
+      <div class="w-full relative" style="background-color: #F7F8FA">
+        <div class="absolute right-0 bottom-0">
+          <img src="@/assets/images/vector-culture.png" alt="">
+        </div>
         <div class="section mx-auto" id="section-2">
           <CultureAndTradition></CultureAndTradition>
         </div>

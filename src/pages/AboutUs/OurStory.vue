@@ -141,6 +141,9 @@ export default {
 }
 
 @media (max-width : 992px) {
+  .slider-container {
+    padding: 0 0 48px 0;
+  }
   .slider-title {
     font-size:28px;
   }

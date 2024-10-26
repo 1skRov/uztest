@@ -26,10 +26,11 @@ export default {
       <div class="map-title flex justify-between">
         <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
       </div>
-      <div class="relative bg-blue-50 map-title" style="height: 940px;">
+      <div class="relative map-title">
         <div class="absolute top-0 left-0">
           <p class="text-sm" style="color: #575F6C">Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
         </div>
+        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full" style="fill: none">
       </div>
     </div>
     <div class="cursor-pointer map-title">
@@ -89,17 +90,14 @@ export default {
   .hide {
     display: none;
   }
-
   .map {
     padding:48px 0;
-
-
     h2 {
       font-size: 28px;
       line-height: 36px;
     }
     p{
-      font-size: 14px;
+      font-size: 12px;
     }
   }
   .map-title {
