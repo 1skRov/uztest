@@ -1,7 +1,6 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
-import axios from "axios";
 export default {
   name: "Section3",
   components: {moreDetail, SideBar},
@@ -14,34 +13,35 @@ export default {
       data_description: null,
     };
   },
-  mounted() {
-    this.cultAndTraditions();
-  },
-  methods: {
-    cultAndTraditions() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const filteredData = response.data.filter(item => item.category_id === 4);
-            this.data = filteredData;
-            this.data_title = filteredData[0].title;
-            this.data_description = filteredData[0].full_desc;
-            console.log("test", filteredData);
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    }
-  }
+  // mounted() {
+  //   this.cultAndTraditions();
+  // },
+  // methods: {
+  //   cultAndTraditions() {
+  //     api.get('/informations/', {
+  //       params: { lang_code: 'ru' },
+  //       headers: {
+  //         'ngrok-skip-browser-warning': 'true'
+  //       }
+  //     })
+  //         .then(response => {
+  //           const filteredData = response.data.filter(item => item.category_id === 4);
+  //           this.data = filteredData;
+  //           this.data_title = filteredData[0].title;
+  //           this.data_description = filteredData[0].full_desc;
+  //           console.log("test", response.data);
+  //         })
+  //         .catch(error => {
+  //           if (error.response) {
+  //             console.error("Response error:", error.response.status, error.response.data);
+  //           } else if (error.request) {
+  //             console.error("No response received:", error.request);
+  //           } else {
+  //             console.error("Request setup error:", error.message);
+  //           }
+  //         });
+  //   }
+  // }
 }
 </script>
 
@@ -58,15 +58,16 @@ export default {
       </router-link>
     </div>
     <div class="content-body">
+      <div class="gradient-overlay"></div>
       <img src="@/assets/images/img.png" alt="" class="w-full h-full">
       <div class="absolute bottom-0 left-0 p-10">
-        <div class="image-title">{{ data_title}}</div>
-        <div class="image-desc">{{ data_description }}</div>
+        <div class="image-title">фвыаывпф</div>
+        <div class="image-desc">фывпфып</div>
       </div>
     </div>
     <div class="for-mob">
-      <div class="image-title font-gilroy">{{ data_title}}</div>
-      <div class="image-desc">{{ data_description }}</div>
+      <div class="image-title font-gilroy">adfgafdgadfg</div>
+      <div class="image-desc">adfgadfgadfg</div>
     </div>
     <router-link :to="{ name: 'AboutUs', hash: '#section-2' }" class="btn-hide">
       <moreDetail :title="title"/>
@@ -89,14 +90,23 @@ export default {
     }
   }
   .content-body {
-    @apply content-end relative mx-auto;
+    @apply content-end relative mx-auto flex-shrink-0 overflow-hidden;
     width: 75%; border-radius: 6px;
     .image-title {
-      @apply text-white font-medium text-2xl mb-4;
+      @apply relative text-white font-medium text-2xl mb-4 z-10;
     }
     .image-desc {
-      @apply font-normal text-base leading-8;
+      @apply relative font-normal text-base leading-8 z-10;
       color: rgba(255, 255, 255, 0.7);
+    }
+    .gradient-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+      z-index: 1;
     }
   }
   .btn-hide {
