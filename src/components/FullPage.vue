@@ -16,9 +16,9 @@ export default {
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
-<!--      <footer class="w-full">-->
-<!--        <FooterPage></FooterPage>-->
-<!--      </footer>-->
+      <footer class="w-full">
+        <FooterPage></FooterPage>
+      </footer>
     </div>
   </div>
 </template>

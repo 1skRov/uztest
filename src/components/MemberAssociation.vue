@@ -135,7 +135,32 @@ p {
   }
 }
 @media (max-width : 992px) {
-
+  .modal {
+    @apply p-4;
+    max-height: 90%;
+  }
+  h2 {
+    font-size: 27px;
+    line-height: 28px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 14px
+  }
+  .form {
+    @apply flex flex-col gap-4;
+    .label {
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    input {
+      @apply px-2 py-0.5;
+    }
+  }
+  .btn {
+    @apply py-1 px-2;
+    font-size: 12px;
+  }
 }
 @media (max-width : 760px) {
   .modal {
