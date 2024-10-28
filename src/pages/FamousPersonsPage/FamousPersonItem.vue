@@ -11,15 +11,15 @@ export default {
 
 <template>
 <div style="border: 1px solid #EBEEF0; border-radius: 8px; overflow: hidden;" class="flex">
-  <div style="width: 15%">
+  <div style="width: 15%" class="flex-shrink">
     <img src="@/assets/images/img_1.png" alt="" class="w-full h-full">
   </div>
-  <div style="padding: 0 60px" class="flex items-center w-full">
-    <div>
+  <div class="flex items-center w-full">
+    <div class="px-4 py-1.5">
       <p class="font-gilroy">Пулатов Шерзод Аббозович</p>
       <span class="text-lg" style="color:#575F6C">Председатель, член АНК, член НЭС АНК</span>
-      <div class="mt-6 hide">
-        <button @click="PersonDetail" class="uppercase font-medium text-base py-2.5 px-4 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">подробнее</button>
+      <div class="mt-3">
+        <button @click="PersonDetail">подробнее</button>
       </div>
     </div>
   </div>
@@ -32,15 +32,21 @@ p {
   font-size: 32px;
   line-height: 38px;
 }
+button {
+  @apply uppercase font-medium text-base py-2.5 px-4 text-white;
+  border-radius: 6px;
+  border: 1px solid #CFD3DA;
+  background-color: #0072AB;
+}
 @media (max-width : 992px) {
-  .hide {
-    display: none;
-  }
   p {
-    font-size: 28px;
+    font-size: 24px;
   }
-
   span {
+    font-size: 14px;
+  }
+  button {
+    @apply py-1.5 px-2;
     font-size: 14px;
   }
 }

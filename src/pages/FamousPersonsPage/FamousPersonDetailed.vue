@@ -23,7 +23,7 @@ export default {
       <div class="fixed top-0 left-0 bg-black w-full h-full opacity-70" style="z-index: 20" @click="closeModal"></div>
       <div class="bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded" style="z-index: 30">
         <div class="flex">
-          <div style="padding: 64px 40px" class="flex-shrink-0">
+          <div style="width: 40%; padding: 64px 40px" class="flex-shrink-0">
             <img src="@/assets/images/img_1.png" class="rounded">
           </div>
           <div class="p-6 w-full flex flex-col">

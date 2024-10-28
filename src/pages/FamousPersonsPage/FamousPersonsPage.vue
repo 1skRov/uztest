@@ -29,19 +29,19 @@ export default {
 
 <template>
   <div class="w-full relative">
-    <div class="h-full absolute top-0 left-0">
+    <div class="h-full absolute top-0 left-0 hide">
       <SideBarText :title="title"/>
     </div>
 
-    <div class="w-full" style="padding: 80px 0">
-      <div class="mx-auto flex justify-between" style="width:65%; margin-bottom: 48px;">
-        <p class="font-gilroy" style="font-weight: 500; font-size: 40px">Известные личности</p>
+    <div class="content main">
+      <div class="title">
+        <p class="font-gilroy">Известные личности</p>
         <div class="flex gap-6 items-center">
           <prev-btn></prev-btn>
           <next-btn/>
         </div>
       </div>
-      <div class="mx-auto" style="width:65%;">
+      <div>
         <FamousPersonItem class="mp"/>
         <FamousPersonItem class="mp"/>
         <FamousPersonItem class="mp"/>
@@ -52,7 +52,41 @@ export default {
 </template>
 
 <style scoped>
+.content {
+  width: 75%;
+  @apply mx-auto;
+}
+.main {
+  padding: 80px 0;
+}
+.title {
+  @apply mx-auto flex justify-between;
+  margin-bottom: 48px;
+  p {
+    font-weight: 500; font-size: 40px;
+  }
+}
 .mp + .mp {
   @apply mt-6;
+}
+@media (max-width : 992px) {
+  .hide {
+    display: none;
+  }
+  .content {
+    width: 90%;
+  }
+  .main {
+    padding: 48px 0;
+  }
+  .title {
+    margin-bottom: 28px;
+    p {
+      font-size: 28px;
+    }
+  }
+}
+@media (max-width : 760px) {
+
 }
 </style>
