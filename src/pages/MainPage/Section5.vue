@@ -19,7 +19,7 @@ export default {
       <SideBar :page="page"/>
     </div>
     <div class="content">
-      <div style="" class="content-title">
+      <div class="content-title">
         <div>
           <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
           <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
@@ -32,7 +32,7 @@ export default {
         <div class="absolute top-0 left-0">
           <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
         </div>
-        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full" style="fill: none">
+        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full">
       </div>
       <router-link to="/regions/guide" class="btn-has">
         <moreDetail :title="title"/>
@@ -43,13 +43,12 @@ export default {
 
 <style scoped>
 .content {
-  @apply mx-auto;
   padding: 80px 0;
-  width: 75%;
 
   .content-title {
-    @apply flex justify-between items-center w-full;
+    @apply flex justify-between items-center mx-auto;
     padding-bottom: 40px;
+    width: 75%;
 
     h2 {
       font-size: 40px;
@@ -61,11 +60,16 @@ export default {
     }
   }
   .content-body {
-    @apply w-full;
+    width: 75%;
+    @apply  mx-auto;
     p {
       @apply text-sm;
       color: #575F6C;
+
     }
+  }
+  .btn-has {
+    display: none;
   }
 }
 @media (max-width : 992px) {
@@ -73,12 +77,12 @@ export default {
     display: none;
   }
   .content {
-    @apply mx-auto;
     padding: 48px 0;
-    width: 90%;
 
     .content-title {
       padding-bottom: 32px;
+      @apply mx-auto;
+      width: 90%;
 
       h2 {
         font-size: 24px;
@@ -88,7 +92,8 @@ export default {
       }
     }
     .content-body {
-      @apply w-full;
+      @apply w-full mx-auto;
+      width: 90%;
       p {
         font-size: 12px;
       }

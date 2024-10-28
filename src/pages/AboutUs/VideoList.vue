@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="content">
     <div class="title">
       <h2 class="font-gilroy">
         Видео материалы
@@ -35,6 +35,10 @@ export default {
 </template>
 
 <style scoped>
+.content {
+  width: 65%;
+  @apply mx-auto;
+}
 .title {
   @apply w-full flex items-center justify-between;
   margin-bottom: 56px;
@@ -44,6 +48,9 @@ export default {
   }
 }
 @media (max-width : 992px) {
+  .content {
+    width: 90%;
+  }
   .title {
     margin-bottom: 48px;
     h2 {

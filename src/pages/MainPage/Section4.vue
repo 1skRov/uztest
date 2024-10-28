@@ -1,6 +1,7 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
+import axios from "axios";
 export default {
   name: "Section4",
   components: {moreDetail, SideBar},
@@ -14,26 +15,56 @@ export default {
     return {
       page: "04",
       title:"узнать больше",
-      items: [
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
+      baseURL: "https://53ea-91-185-26-183.ngrok-free.app/",
+      // items: [
+      //   {
+      //     name: "Пулатов Шерзод Аббозович",
+      //     position: "Председатель, член АНК, член НЭС АНК"
+      //   },
+      //   {
+      //     name: "Пулатов Шерзод Аббозович",
+      //     position: "Председатель, член АНК, член НЭС АНК"
+      //   },
+      //   {
+      //     name: "Пулатов Шерзод Аббозович",
+      //     position: "Председатель, член АНК, член НЭС АНК"
+      //   },
+      //   {
+      //     name: "Пулатов Шерзод Аббозович",
+      //     position: "Председатель, член АНК, член НЭС АНК"
+      //   }
+      // ]
+      items:null,
+      images:null,
+    };
+  },
+  mounted() {
+    this.famPeop();
+  },
+  methods: {
+    famPeop() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
         }
-      ]
-      };
+      })
+          .then(response => {
+            const filteredData = response.data.filter(item => item.category_id === 5);
+            this.items = filteredData;
+            console.log("izv_lich",filteredData);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    }
   }
+
 }
 </script>
 
@@ -53,14 +84,14 @@ export default {
     </div>
     <div class="content">
         <div v-for="i in items" :key="i.id" class="izo relative overflow-hidden group">
-          <div>
-            <img src="@/assets/images/img_1.png" alt="" style="width: 100%; height: 100%">
+          <div class="flex flex-shrink">
+            <img src="@/assets/images/img_1.png" alt="" class="w-full h-full">
           </div>
           <div class="izo-item absolute inset-0 opacity-0 group-hover:opacity-80 flex flex-col justify-end items-center text-center transition-opacity duration-300 p-6">
           </div>
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end items-center text-center transition-opacity duration-700 p-6">
-            <p class="font-gilroy text-start" style="font-size: 24px; font-weight: 500; color: white">{{ i.name }}</p>
-            <span class="text-white mt-2 text-start" style="font-size: 14px">{{ i.position }}</span>
+            <p class="font-gilroy text-start">{{ i.title }}</p>
+            <span class="text-white mt-2 text-start">{{ i.job }}</span>
           </div>
         </div>
     </div>
@@ -75,16 +106,16 @@ export default {
 
 <style scoped>
 .main {
-  padding: 64px 0 64px 188px;
+  padding: 64px 0;
   @apply w-full;
 }
 .content {
-  @apply flex justify-between relative;
-  width: 65%;
+  @apply flex justify-between relative mx-auto;
+  width: 75%;
 }
 .content-f {
-  @apply flex justify-between;
-  width: 65%;
+  @apply flex justify-between mx-auto items-center;
+  width: 75%;
   padding-bottom: 56px;
   h2 {
     font-size: 40px; line-height: 52px; font-weight: 500;
@@ -92,13 +123,19 @@ export default {
 }
 .izo {
   border-radius: 6px;
-  width: 288px;
-  height: 384px;
+  max-width: 288px;
+  max-height: 384px;
   @apply bg-gray-100;
 
   .izo-item {
     background-color: #0072AB;
   }
+}
+p {
+  font-size: 24px; font-weight: 500; color: white;
+}
+span {
+  font-size: 14px;
 }
 .mobile-has {
   display:none;
@@ -107,7 +144,26 @@ export default {
   .hide {
     display: none;
   }
-
+  .main {
+    padding: 48px 0;
+    @apply w-full;
+  }
+  .content {
+    width: 90%;
+    @apply gap-5;
+  }
+  .content-f {
+    width: 90%;
+    h2 {
+      font-size: 28px;
+    }
+  }
+  p {
+    font-size: 18px;
+  }
+  span {
+    font-size: 12px;
+  }
 }
 @media (max-width : 760px) {
   .mobile-has {

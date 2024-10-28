@@ -1,19 +1,21 @@
 <script>
+import axios from "axios";
+
 export default {
   name: 'MainHeader',
   data() {
     return {
-      lists: [
-        { name: "О нас", to: "/about-us" },
-        { name: "Регионы", to: "/regions/guide" },
-        { name: "Документы", to: "/documents" },
-        { name: "Пресс Центр", to: "/press-center" },
-        { name: "Личности", to: "/famous-persons" },
-        { name: "Контакты", to: "/contacts/republic-contacts" },
-      ],
-      address: "Дом дружбы, г.Астана, \nпр.Б. Момышулы, 24/9, офис 21",
-      phone: "+7(701) 162 78-00,\n+7(701) 162 78-00.",
+      lists: null ,
+      title:{},
+      address: "",
+      phone: "",
       isSidebarActive: false,
+      languages: [
+        { code: 'ru', name: 'Рус' },
+        { code: 'en', name: 'English' },
+        { code: 'kz', name: 'Қаз' }
+      ],
+      isLanguageListVisible: false,
     }
   },
   computed: {
@@ -23,6 +25,10 @@ export default {
     formattedPhone() {
       return this.phone.replace(/\n/g, '<br>');
     }
+  },
+  mounted() {
+    this.fetchListMenu();
+    this.fetchContacts();
   },
   methods: {
     ReturnMainPage() {
@@ -34,6 +40,69 @@ export default {
     toggleSidebar() {
       this.isSidebarActive = !this.isSidebarActive;
     },
+    toggleLanguageList() {
+      this.isLanguageListVisible = !this.isLanguageListVisible; // переключаем видимость
+    },
+    selectLanguage(languageCode) {
+      // Логика выбора языка, возможно вызов метода для смены языка
+      console.log('Выбран язык:', languageCode);
+      this.isLanguageListVisible = false; // закрыть список после выбора языка
+    },
+    fetchListMenu() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/navbars/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            const serverData = response.data;
+
+            if (serverData && serverData.length > 0) {
+              this.lists = serverData.map((item, index) => {
+                const routes = ["/about-us", "/regions/guide", "/documents", "/press-center", "/famous-persons", "/contacts/republic-contacts"];
+
+                return {
+                  name: item.title,
+                  to: routes[index]
+                };
+              });
+            }
+            console.log("Меню обновлено с сервера:", this.lists);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    },
+    fetchContacts() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/contacts/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            const contactData = response.data[0];
+
+            if (contactData) {
+              this.address = contactData.address || this.address;
+              this.phone = contactData.phone1 + ',\n' + contactData.phone2;
+            }
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    }
   }
 }
 </script>
@@ -86,11 +155,17 @@ export default {
       </div>
       <!--      local-->
       <div class="flex local">
-        <div class="flex gap-2.5 items-center pl-4 pr-5" style="border-left: 1px solid #EBEEF0">
+        <div @click="toggleLanguageList" class="flex gap-2.5 items-center pl-4 pr-5 cursor-pointer" style="border-left: 1px solid #EBEEF0">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.0003 2.66663C8.64833 2.66663 2.66699 8.64796 2.66699 16C2.66699 23.352 8.64833 29.3333 16.0003 29.3333C23.3523 29.3333 29.3337 23.352 29.3337 16C29.3337 8.64796 23.3523 2.66663 16.0003 2.66663ZM25.2243 10.6666H22.151C21.8217 9.06796 21.3443 7.64663 20.7483 6.46129C22.619 7.39729 24.1763 8.86396 25.2243 10.6666ZM26.667 16C26.667 16.9226 26.5377 17.812 26.3163 18.6666H22.543C22.623 17.8093 22.667 16.9186 22.667 16C22.667 15.0813 22.623 14.1906 22.543 13.3333H26.3163C26.5377 14.188 26.667 15.0773 26.667 16ZM16.0003 26.6666C14.8763 26.6666 13.4017 24.692 12.5937 21.3333H19.4057C18.599 24.692 17.1243 26.6666 16.0003 26.6666ZM12.1443 18.6666C12.055 17.828 12.0003 16.9426 12.0003 16C12.0003 15.0573 12.055 14.172 12.1443 13.3333H19.8563C19.9457 14.172 20.0003 15.0573 20.0003 16C20.0003 16.9426 19.9457 17.828 19.8563 18.6666H12.1443ZM5.33366 16C5.33366 15.0773 5.46299 14.188 5.68433 13.3333H9.45766C9.37766 14.1906 9.33366 15.0813 9.33366 16C9.33366 16.9186 9.37766 17.8093 9.45766 18.6666H5.68433C5.46299 17.812 5.33366 16.9226 5.33366 16ZM16.0003 5.33329C17.1243 5.33329 18.599 7.30796 19.407 10.6666H12.5937C13.4017 7.30796 14.8763 5.33329 16.0003 5.33329ZM11.2537 6.46129C10.6577 7.64663 10.1803 9.06796 9.85099 10.6666H6.77632C7.82433 8.86396 9.38166 7.39729 11.2537 6.46129ZM6.77632 21.3333H9.84966C10.179 22.932 10.6563 24.3533 11.2523 25.5386C9.38166 24.6026 7.82433 23.136 6.77632 21.3333ZM20.747 25.5386C21.343 24.3533 21.819 22.932 22.1497 21.3333H25.223C24.1763 23.136 22.619 24.6026 20.747 25.5386Z" fill="#0072AB" fill-opacity="0.3"/>
           </svg>
           <p class="text-sm uppercase">Рус</p>
+        </div>
+        <!-- Dropdown list of languages -->
+        <div v-if="isLanguageListVisible" class="absolute top-10 left-0 bg-white shadow-lg border rounded mt-1">
+          <ul class="p-2">
+            <li v-for="(lang, index) in languages" :key="index" @click="selectLanguage(lang.code)" class="py-1 px-4 cursor-pointer hover:bg-gray-200">{{ lang.name }}</li>
+          </ul>
         </div>
         <div class="flex items-center px-5" style="border-left: 1px solid #EBEEF0">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

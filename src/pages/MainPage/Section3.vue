@@ -1,14 +1,46 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
+import axios from "axios";
 export default {
   name: "Section3",
   components: {moreDetail, SideBar},
   data() {
     return {
       page: "03",
-      title:"узнать больше"
+      title:"узнать больше",
+      data:null,
+      data_title: null,
+      data_description: null,
     };
+  },
+  mounted() {
+    this.cultAndTraditions();
+  },
+  methods: {
+    cultAndTraditions() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            const filteredData = response.data.filter(item => item.category_id === 4);
+            this.data = filteredData;
+            this.data_title = filteredData[0].title;
+            this.data_description = filteredData[0].full_desc;
+            console.log("test", filteredData);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    }
   }
 }
 </script>
@@ -28,13 +60,13 @@ export default {
     <div class="content-body">
       <img src="@/assets/images/img.png" alt="" class="w-full h-full">
       <div class="absolute bottom-0 left-0 p-10">
-        <div class="image-title">Культура и традиция</div>
-        <div class="image-desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptate</div>
+        <div class="image-title">{{ data_title}}</div>
+        <div class="image-desc">{{ data_description }}</div>
       </div>
     </div>
     <div class="for-mob">
-      <div class="image-title font-gilroy">Культура и традиция</div>
-      <div class="image-desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptate</div>
+      <div class="image-title font-gilroy">{{ data_title}}</div>
+      <div class="image-desc">{{ data_description }}</div>
     </div>
     <router-link :to="{ name: 'AboutUs', hash: '#section-2' }" class="btn-hide">
       <moreDetail :title="title"/>

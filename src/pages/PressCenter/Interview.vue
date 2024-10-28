@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex justify-between gap-6">
+  <div class="content">
     <div class="w-full">
       <h2 class="font-gilroy title">
         Интервью
@@ -41,6 +41,10 @@ export default {
 </template>
 
 <style scoped>
+.content {
+  width: 65%;
+  @apply flex justify-between gap-6 mx-auto;
+}
 .title {
   @apply mb-6;
   font-weight: 500;

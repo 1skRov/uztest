@@ -1,6 +1,7 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue"
+import axios from "axios";
 
 export default {
   name: "Section2",
@@ -8,13 +9,38 @@ export default {
   data () {
     return {
       page: "02",
-      title:"подробнее"
+      title:"подробнее",
+      desc: null,
     }
+  },
+  mounted() {
+    this.about();
   },
   methods: {
     GotoAboutUs(){
       this.$router.push({ name: 'AboutUs' });
     },
+    about() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            const filteredData = response.data.filter(item => item.category_id === 3);
+            this.desc = filteredData[0].full_desc;
+            console.log("main",filteredData);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    }
   }
 }
 </script>
@@ -29,6 +55,7 @@ export default {
         <div>
           <h2 class="font-gilroy">О нас</h2>
           <div class="content-text">
+            {{desc}}
             <p>
               Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
             </p>

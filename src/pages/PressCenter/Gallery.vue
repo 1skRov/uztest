@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="content">
     <div class="title">
       <h2 class="font-gilroy">
         Фотогалерея
@@ -35,6 +35,10 @@ export default {
 </template>
 
 <style scoped>
+.content {
+  @apply mx-auto;
+  width: 65%;
+}
 .title {
   margin-bottom: 56px;
   @apply w-full flex items-center justify-between;
@@ -49,6 +53,9 @@ export default {
   @apply gap-y-8 gap-x-6;
 }
 @media (max-width : 992px) {
+  .content{
+    width: 90%;
+  }
   .title {
     margin-bottom: 48px;
     h2 {

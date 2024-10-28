@@ -1,17 +1,45 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue"
+import axios from 'axios';
 export default {
   name: "Section1",
   components: {SideBar},
   data() {
     return {
       page: "01",
+      title: null,
+      desc: null,
     }
   },
   methods: {
     openModal() {
       this.$router.push('/member-association')
     },
+    main_page() {
+      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            const filteredData = response.data.filter(item => item.category_id === 2);
+            this.title = filteredData[0].title;
+            this.desc = filteredData[0].mini_desc;
+            console.log("main",filteredData);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          });
+    }
+  },
+  mounted() {
+    this.main_page();
   }
 }
 </script>
@@ -40,14 +68,11 @@ export default {
       </div>
       <div class="backdrop-blur-container">
         <div class="relative z-10">
-          <h1 class="font-gilroy">
-            «Ассоциация этнокультурных <br>
-            объединений узбеков Республики <br>
-            Казахстан «Дустлик»
+          <h1 class="font-gilroy" style="max-width: 70%; word-wrap: break-word;">
+            {{ title }}
           </h1>
           <p>
-            Для узбекской общины в Казахстане единство <br>
-            это основа нашего общего будущего и залог процветания и развития нашего народа.
+            {{ desc}}
           </p>
         </div>
         <div>
@@ -90,6 +115,8 @@ export default {
       @apply text-sm mt-6 mb-10;
       color:#575F6C;
       line-height: 32px;
+      max-width: 70%;
+      word-wrap: break-word;
     }
     button {
       @apply uppercase text-base bg-white hover:bg-gray-50 py-4 px-6;

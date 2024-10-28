@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex" style="border: 1px solid #EBEEF0; border-radius:8px; background: #FAFCFD;">
+  <div class="content">
     <div class="left">
       <p class="font-gilroy title">
         Помощь нуждающимся
@@ -32,6 +32,13 @@ export default {
 </template>
 
 <style scoped>
+.content {
+  width: 65%;
+  border: 1px solid #EBEEF0;
+  border-radius:8px;
+  background: #FAFCFD;
+  @apply flex mx-auto;
+}
 .left {
   @apply w-full p-16;
   .title {

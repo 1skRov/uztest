@@ -46,8 +46,7 @@ export default {
 
 <style scoped>
 .section {
-  @pply mx-auto;
-  width:65%;
+  padding: 56px 0;
 }
 @media (max-width : 992px) {
   .hide {
@@ -55,8 +54,6 @@ export default {
   }
   .section {
     padding: 48px 0;
-    width: 90%;
-    @apply mx-auto;
   }
 }
 </style>
