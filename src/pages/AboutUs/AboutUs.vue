@@ -74,7 +74,7 @@ export default {
       <div id="section-0" class="section mx-auto">
         <WhoWeAre></WhoWeAre>
       </div>
-      <div id="section-1" class="section hid-p mx-auto">
+      <div id="section-1" class="section mx-auto">
         <OurStory></OurStory>
       </div>
       <div class="w-full relative" style="background-color: #F7F8FA">

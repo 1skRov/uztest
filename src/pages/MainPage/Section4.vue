@@ -2,6 +2,7 @@
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
 import axios from "axios";
+import {onBeforeMount} from "vue";
 export default {
   name: "Section4",
   components: {moreDetail, SideBar},
@@ -9,13 +10,15 @@ export default {
     hasSidebar:{
       default: true,
       type: Boolean,
+    },
+    data: {
+      type: Object
     }
   },
   data() {
     return {
       page: "04",
       title:"узнать больше",
-      baseURL: "https://53ea-91-185-26-183.ngrok-free.app/",
       items: [
         {
           name: "Пулатов Шерзод Аббозович",
@@ -46,21 +49,21 @@ export default {
   </div>
   <div class="main">
     <div class="main-title">
-      <h2 class="font-gilroy">Известные личности</h2>
+      <h2 class="font-gilroy">{{ data.category_title }}</h2>
       <div class="mobile">
         <router-link to="/famous-persons">
-          <moreDetail :title="title"/>
+          <moreDetail :title="data.buttons_title"/>
         </router-link>
       </div>
     </div>
-    <div class="main-content">
-      <div v-for="i in items" :key="i.id" class="carousel izo">
-        <div class="image-wrapper relative">
-          <img src="@/assets/images/img_1.png" alt="" class="w-full h-full test">
+    <div class="main-content gap-3">
+      <div v-for="i in data" :key="i.id" class="carousel">
+        <div class="image-wrapper">
+          <img src="@/assets/images/img_1.png" alt="" class="w-full h-full rounded">
           <div class="gradient-overlay absolute bottom-0 left-0"></div>
           <div class="main-text">
-            <p class="font-gilroy">{{ i.name }}</p>
-            <span>{{ i.position }}</span>
+            <p class="font-gilroy">{{ i.title }}</p>
+            <span>{{ i.job }}</span>
           </div>
         </div>
       </div>

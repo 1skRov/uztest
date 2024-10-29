@@ -26,10 +26,10 @@ export default {
       return this.phone.replace(/\n/g, '<br>');
     }
   },
-  mounted() {
-    this.fetchListMenu();
-    this.fetchContacts();
-  },
+  // mounted() {
+  //   this.fetchListMenu();
+  //   this.fetchContacts();
+  // },
   methods: {
     ReturnMainPage() {
       this.$router.push({ name: 'MainPage' });
@@ -48,61 +48,61 @@ export default {
       console.log('Выбран язык:', languageCode);
       this.isLanguageListVisible = false; // закрыть список после выбора языка
     },
-    fetchListMenu() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/navbars/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const serverData = response.data;
-
-            if (serverData && serverData.length > 0) {
-              this.lists = serverData.map((item, index) => {
-                const routes = ["/about-us", "/regions/guide", "/documents", "/press-center", "/famous-persons", "/contacts/republic-contacts"];
-
-                return {
-                  name: item.title,
-                  to: routes[index]
-                };
-              });
-            }
-            console.log("Меню обновлено с сервера:", this.lists);
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    },
-    fetchContacts() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/contacts/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const contactData = response.data[0];
-
-            if (contactData) {
-              this.address = contactData.address || this.address;
-              this.phone = contactData.phone1 + ',\n' + contactData.phone2;
-            }
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    }
+    // fetchListMenu() {
+    //   axios.get('https://53ea-91-185-26-183.ngrok-free.app/navbars/?lang_code=ru', {
+    //     headers: {
+    //       'ngrok-skip-browser-warning': 'true'
+    //     }
+    //   })
+    //       .then(response => {
+    //         const serverData = response.data;
+    //
+    //         if (serverData && serverData.length > 0) {
+    //           this.lists = serverData.map((item, index) => {
+    //             const routes = ["/about-us", "/regions/guide", "/documents", "/press-center", "/famous-persons", "/contacts/republic-contacts"];
+    //
+    //             return {
+    //               name: item.title,
+    //               to: routes[index]
+    //             };
+    //           });
+    //         }
+    //         console.log("Меню обновлено с сервера:", this.lists);
+    //       })
+    //       .catch(error => {
+    //         if (error.response) {
+    //           console.error("Response error:", error.response.status, error.response.data);
+    //         } else if (error.request) {
+    //           console.error("No response received:", error.request);
+    //         } else {
+    //           console.error("Request setup error:", error.message);
+    //         }
+    //       });
+    // },
+    // fetchContacts() {
+    //   axios.get('https://53ea-91-185-26-183.ngrok-free.app/contacts/?lang_code=ru', {
+    //     headers: {
+    //       'ngrok-skip-browser-warning': 'true'
+    //     }
+    //   })
+    //       .then(response => {
+    //         const contactData = response.data[0];
+    //
+    //         if (contactData) {
+    //           this.address = contactData.address || this.address;
+    //           this.phone = contactData.phone1 + ',\n' + contactData.phone2;
+    //         }
+    //       })
+    //       .catch(error => {
+    //         if (error.response) {
+    //           console.error("Response error:", error.response.status, error.response.data);
+    //         } else if (error.request) {
+    //           console.error("No response received:", error.request);
+    //         } else {
+    //           console.error("Request setup error:", error.message);
+    //         }
+    //       });
+    // }
   }
 }
 </script>

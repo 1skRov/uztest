@@ -49,16 +49,16 @@ export default {
       </div>
       <div class="backdrop-blur-container">
         <div class="relative z-10">
-          <h1 class="font-gilroy" style="max-width: 70%; word-wrap: break-word;">
-            {{ data.title }}
+          <h1 class="font-gilroy" style="word-wrap: break-word;">
+            {{ data.category_title }}
           </h1>
           <p>
-            {{ data.desc}}
+            {{ data.mini_desc}}
           </p>
         </div>
         <div>
           <button @click="openModal">
-            стать членом ассоциации
+            {{ data.buttons_title }}
           </button>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default {
     border-radius: 0 8px 8px 0;
     border-left: 1px solid #0072AB;
     overflow: hidden;
-    @apply absolute top-1/2 transform -translate-y-1/2;
+    @apply absolute top-1/2 transform -translate-y-1/2 w-2/3;
 
     h1 {
       font-size: 40px;
@@ -96,7 +96,6 @@ export default {
       @apply text-sm mt-6 mb-10;
       color:#575F6C;
       line-height: 32px;
-      max-width: 70%;
       word-wrap: break-word;
     }
     button {

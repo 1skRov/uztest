@@ -39,16 +39,19 @@ export default {
       })
           .then(response => {
             const groupedData = response.data.reduce((acc, item) => {
-              acc[item.category_id] = item;
+              if (!acc[item.category_id]) {
+                acc[item.category_id] = [];
+              }
+              acc[item.category_id].push(item);
               return acc;
             }, {});
 
-            this.s1 = groupedData[2];
-            this.s2 = groupedData[3];
-            this.s3 = groupedData[5];
-            this.s4 = groupedData[6];
-            this.s5 = groupedData[7];
-            this.s6 = groupedData[8];
+            this.s1 = groupedData[2] ? groupedData[2][0] : {};
+            this.s2 = groupedData[3] ? groupedData[3][0] : {};
+            this.s3 = groupedData[4] ? groupedData[4][0] : {};
+            this.s4 = groupedData[5] ? groupedData[5] : [];
+            this.s5 = groupedData[6] ? groupedData[6][0] : {};
+            this.s6 = groupedData[9] ? groupedData[9][0] : {};
             console.log("s1--->", this.s1);
           })
           .catch(error => {
@@ -61,35 +64,6 @@ export default {
             }
           });
     }
-    // main() {
-    //   api.get('/informations/', {
-    //     params: { lang_code: 'ru' },
-    //     headers: {
-    //       'ngrok-skip-browser-warning': 'true'
-    //     }
-    //   })
-    //       .then(response => {
-    //         const page_one = response.data.filter(item => item.category_id === 2);
-    //         this.s1.title = page_one.title;
-    //         this.s1.desc = page_one.mini_desc;
-    //         const page_two = response.data.filter(item => item.category_id === 3);
-    //         const page_three = response.data.filter(item => item.category_id === 5);
-    //         const page_four = response.data.filter(item => item.category_id === 6);
-    //         const page_five = response.data.filter(item => item.category_id === 7);
-    //         const page_six = response.data.filter(item => item.category_id === 8);
-    //         // this.data_title = filteredData[0].title;
-    //         console.log("test", page_one);
-    //       })
-    //       .catch(error => {
-    //         if (error.response) {
-    //           console.error("Response error:", error.response.status, error.response.data);
-    //         } else if (error.request) {
-    //           console.error("No response received:", error.request);
-    //         } else {
-    //           console.error("Request setup error:", error.message);
-    //         }
-    //       });
-    // }
   }
 }
 </script>
@@ -98,15 +72,15 @@ export default {
   <div class="w-full">
     <Section1 :data="s1"/>
     <div class="tablet">
-      <Section3 />
+      <Section3 :data="s3"/>
     </div>
-    <Section2 />
+    <Section2 :data="s2"/>
     <div class="mobile">
-      <Section3 />
+      <Section3 :data="s3"/>
     </div>
-    <Section4/>
-    <Section5 />
-    <Section6 />
+    <Section4 :data="s4"/>
+    <Section5 :data="s5"/>
+    <Section6 :data="s6"/>
   </div>
 </template>
 

@@ -4,7 +4,7 @@
       <SideBar :page="page" :icon="false" />
     </div>
     <div class="cont">
-      <h2 class="font-gilroy">Наши партнеры</h2>
+      <h2 class="font-gilroy">{{ data.category_title }}</h2>
       <div class="slider">
         <div class="slide-track" :style="slideTrackStyle">
           <div
@@ -35,6 +35,11 @@ export default {
     NextBtn,
     SideBar,
     moreDetail,
+  },
+  props:{
+    data:{
+      type: Object
+    }
   },
   data() {
     return {

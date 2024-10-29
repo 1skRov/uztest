@@ -6,6 +6,11 @@ import axios from "axios";
 export default {
   name: "Section2",
   components: {SideBar, moreDetail},
+  props:{
+    data:{
+      type: Object
+    }
+  },
   data () {
     return {
       page: "02",
@@ -13,34 +18,10 @@ export default {
       desc: null,
     }
   },
-  mounted() {
-    this.about();
-  },
   methods: {
     GotoAboutUs(){
       this.$router.push({ name: 'AboutUs' });
     },
-    about() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const filteredData = response.data.filter(item => item.category_id === 3);
-            this.desc = filteredData[0].full_desc;
-            console.log("main",filteredData);
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    }
   }
 }
 </script>
@@ -53,17 +34,17 @@ export default {
     <div class="content">
       <div class="content-in">
         <div>
-          <h2 class="font-gilroy">О нас</h2>
+          <h2 class="font-gilroy">{{ data.category_title }}</h2>
           <div class="content-text">
-            {{desc}}
-            <p>
-              Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
-            </p>
-            <p>Единый Портал Узбеков Казахстана создан под эгидой Ассамблеи народа Казахстана с целью продвижения деятельности узбекских этнокультурных объединений всех уровней, в том числе Ассоциации этнокультурных общественных объединений узбеков РК "Дустлик".</p>
+            {{ data.full_desc }}
+<!--            <p>-->
+<!--              Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.-->
+<!--            </p>-->
+<!--            <p>Единый Портал Узбеков Казахстана создан под эгидой Ассамблеи народа Казахстана с целью продвижения деятельности узбекских этнокультурных объединений всех уровней, в том числе Ассоциации этнокультурных общественных объединений узбеков РК "Дустлик".</p>-->
           </div>
         </div>
         <div class="btn">
-          <moreDetail :title="title" @click="GotoAboutUs"/>
+          <moreDetail :title="data.buttons_title" @click="GotoAboutUs"/>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ export default {
           year: "1995 год",
           description:
               "Общественное объединение «Узбекский национальный культурный центр города Астана»...",
-          image: require('@/assets/images/1.png'),
+          image: require('@/assets/images/famous-pers.jpg'),
         },
         {
           year: "1996 год",
@@ -35,7 +35,24 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.updateSlidesPerView();
+    window.addEventListener('resize', this.updateSlidesPerView);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateSlidesPerView);
+  },
   methods: {
+    updateSlidesPerView() {
+      if (window.innerWidth < 768) {
+        this.slidesPerView = 1;
+      } else if (window.innerWidth < 1200) {
+        this.slidesPerView = 2;
+      } else {
+        this.slidesPerView = 3;
+      }
+      this.updateSliderPosition();
+    },
     scrollLeft() {
       if (this.currentSlide > 0) {
         this.currentSlide--;

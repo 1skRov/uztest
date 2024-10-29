@@ -1,47 +1,28 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
+import api from "@/assets/axios";
 export default {
   name: "Section3",
   components: {moreDetail, SideBar},
+  props :{
+    data:{
+      type: Object
+    }
+  },
   data() {
     return {
       page: "03",
-      title:"узнать больше",
-      data:null,
-      data_title: null,
-      data_description: null,
     };
   },
-  // mounted() {
-  //   this.cultAndTraditions();
-  // },
-  // methods: {
-  //   cultAndTraditions() {
-  //     api.get('/informations/', {
-  //       params: { lang_code: 'ru' },
-  //       headers: {
-  //         'ngrok-skip-browser-warning': 'true'
-  //       }
-  //     })
-  //         .then(response => {
-  //           const filteredData = response.data.filter(item => item.category_id === 4);
-  //           this.data = filteredData;
-  //           this.data_title = filteredData[0].title;
-  //           this.data_description = filteredData[0].full_desc;
-  //           console.log("test", response.data);
-  //         })
-  //         .catch(error => {
-  //           if (error.response) {
-  //             console.error("Response error:", error.response.status, error.response.data);
-  //           } else if (error.request) {
-  //             console.error("No response received:", error.request);
-  //           } else {
-  //             console.error("Request setup error:", error.message);
-  //           }
-  //         });
-  //   }
-  // }
+  methods: {
+    getImageUrl(imagePath) {
+      if (imagePath.startsWith('/')) {
+        return `${api.defaults.baseURL}${imagePath}`;
+      }
+      return imagePath;
+    }
+  }
 }
 </script>
 
@@ -52,25 +33,26 @@ export default {
   </div>
   <div class="w-full content">
     <div class="content-title">
-      <h2 class="font-gilroy">Культура и традиция</h2>
+      <h2 class="font-gilroy">{{ data.category_title }}</h2>
       <router-link :to="{ name: 'AboutUs', hash: '#section-2' }" class="btn">
-        <moreDetail :title="title"/>
+        <moreDetail :title="data.buttons_title"/>
       </router-link>
     </div>
     <div class="content-body">
       <div class="gradient-overlay"></div>
+<!--      <img :src="getImageUrl(data.image)" alt="" class="w-full h-full">-->
       <img src="@/assets/images/img.png" alt="" class="w-full h-full">
       <div class="absolute bottom-0 left-0 p-10">
-        <div class="image-title">фвыаывпф</div>
-        <div class="image-desc">фывпфып</div>
+        <div class="image-title">{{ data.title }}</div>
+        <div class="image-desc">{{ data.full_desc }}</div>
       </div>
     </div>
     <div class="for-mob">
-      <div class="image-title font-gilroy">adfgafdgadfg</div>
-      <div class="image-desc">adfgadfgadfg</div>
+      <div class="image-title font-gilroy">{{ data.title }}</div>
+      <div class="image-desc">{{ data.full_desc }}</div>
     </div>
     <router-link :to="{ name: 'AboutUs', hash: '#section-2' }" class="btn-hide">
-      <moreDetail :title="title"/>
+      <moreDetail :title="data.buttons_title"/>
     </router-link>
   </div>
 </div>

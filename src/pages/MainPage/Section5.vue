@@ -4,6 +4,11 @@ import moreDetail from "@/components/buttons/moreDetail.vue";
 export default {
   name: "Section5",
   components: {moreDetail, SideBar},
+  props:{
+    data:{
+      type: Object
+    }
+  },
   data() {
     return {
       page: "05",
@@ -21,21 +26,21 @@ export default {
     <div class="content">
       <div class="content-title">
         <div>
-          <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
+          <h2 class="font-gilroy">{{ data.category_title }}</h2>
+          <p>{{ data.full_desc }}</p>
         </div>
         <router-link to="/regions/guide" class="btn">
-          <moreDetail :title="title"/>
+          <moreDetail :title="data.buttons_title"/>
         </router-link>
       </div>
       <div class="content-body relative">
         <div class="absolute top-0 left-0">
-          <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
+          <p>{{ data.full_desc }}</p>
         </div>
         <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full">
       </div>
       <router-link to="/regions/guide" class="btn-has">
-        <moreDetail :title="title"/>
+        <moreDetail :title="data.buttons_title"/>
       </router-link>
     </div>
   </div>
