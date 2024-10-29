@@ -59,6 +59,9 @@ export default {
   }
 }
 @media (max-width : 992px) {
+  .content {
+    width: 90%;
+  }
   .left {
     padding: 38px;
     .title {

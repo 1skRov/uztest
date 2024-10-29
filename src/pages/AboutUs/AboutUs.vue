@@ -8,7 +8,7 @@ import FamousPersons from "@/pages/AboutUs/FamousPersons.vue";
 import YouthOrganizations from "@/pages/AboutUs/YouthOrganizations.vue";
 import EducationAndSport from "@/pages/AboutUs/EducationAndSport.vue";
 import Help from "@/pages/AboutUs/Help.vue";
-import axiosInstance from '@/assets/axiosConfig.js';
+import axiosInstance from '@/assets/axios.js';
 
 export default {
   name: "AboutUs",

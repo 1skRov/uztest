@@ -59,6 +59,9 @@ export default {
   font-style: italic;
 }
 @media (max-width : 992px) {
+  .content {
+    width: 90%;
+  }
   .title {
     font-size: 28px
   }

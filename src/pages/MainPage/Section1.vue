@@ -4,6 +4,12 @@ import axios from 'axios';
 export default {
   name: "Section1",
   components: {SideBar},
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    }
+  },
   data() {
     return {
       page: "01",
@@ -15,31 +21,6 @@ export default {
     openModal() {
       this.$router.push('/member-association')
     },
-    main_page() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const filteredData = response.data.filter(item => item.category_id === 2);
-            this.title = filteredData[0].title;
-            this.desc = filteredData[0].mini_desc;
-            console.log("main",filteredData);
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    }
-  },
-  mounted() {
-    this.main_page();
   }
 }
 </script>
@@ -69,10 +50,10 @@ export default {
       <div class="backdrop-blur-container">
         <div class="relative z-10">
           <h1 class="font-gilroy" style="max-width: 70%; word-wrap: break-word;">
-            {{ title }}
+            {{ data.title }}
           </h1>
           <p>
-            {{ desc}}
+            {{ data.desc}}
           </p>
         </div>
         <div>

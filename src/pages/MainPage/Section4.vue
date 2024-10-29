@@ -16,55 +16,26 @@ export default {
       page: "04",
       title:"узнать больше",
       baseURL: "https://53ea-91-185-26-183.ngrok-free.app/",
-      // items: [
-      //   {
-      //     name: "Пулатов Шерзод Аббозович",
-      //     position: "Председатель, член АНК, член НЭС АНК"
-      //   },
-      //   {
-      //     name: "Пулатов Шерзод Аббозович",
-      //     position: "Председатель, член АНК, член НЭС АНК"
-      //   },
-      //   {
-      //     name: "Пулатов Шерзод Аббозович",
-      //     position: "Председатель, член АНК, член НЭС АНК"
-      //   },
-      //   {
-      //     name: "Пулатов Шерзод Аббозович",
-      //     position: "Председатель, член АНК, член НЭС АНК"
-      //   }
-      // ]
-      items:null,
-      images:null,
+      items: [
+        {
+          name: "Пулатов Шерзод Аббозович",
+          position: "Председатель, член АНК, член НЭС АНК"
+        },
+        {
+          name: "Пулатов Шерзод Аббозович",
+          position: "Председатель, член АНК, член НЭС АНК"
+        },
+        {
+          name: "Пулатов Шерзод Аббозович",
+          position: "Председатель, член АНК, член НЭС АНК"
+        },
+        {
+          name: "Пулатов Шерзод Аббозович",
+          position: "Председатель, член АНК, член НЭС АНК"
+        }
+      ]
     };
   },
-  mounted() {
-    this.famPeop();
-  },
-  methods: {
-    famPeop() {
-      axios.get('https://53ea-91-185-26-183.ngrok-free.app/informations/?lang_code=ru', {
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        }
-      })
-          .then(response => {
-            const filteredData = response.data.filter(item => item.category_id === 5);
-            this.items = filteredData;
-            console.log("izv_lich",filteredData);
-          })
-          .catch(error => {
-            if (error.response) {
-              console.error("Response error:", error.response.status, error.response.data);
-            } else if (error.request) {
-              console.error("No response received:", error.request);
-            } else {
-              console.error("Request setup error:", error.message);
-            }
-          });
-    }
-  }
-
 }
 </script>
 
@@ -73,8 +44,8 @@ export default {
   <div v-if="hasSidebar" class="hide">
     <SideBar :page="page" :icon="false"/>
   </div>
-  <div class="main" style="">
-    <div class="content-f">
+  <div class="main">
+    <div class="main-title">
       <h2 class="font-gilroy">Известные личности</h2>
       <div class="mobile">
         <router-link to="/famous-persons">
@@ -82,18 +53,17 @@ export default {
         </router-link>
       </div>
     </div>
-    <div class="content">
-        <div v-for="i in items" :key="i.id" class="izo relative overflow-hidden group">
-          <div class="flex flex-shrink">
-            <img src="@/assets/images/img_1.png" alt="" class="w-full h-full">
-          </div>
-          <div class="izo-item absolute inset-0 opacity-0 group-hover:opacity-80 flex flex-col justify-end items-center text-center transition-opacity duration-300 p-6">
-          </div>
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end items-center text-center transition-opacity duration-700 p-6">
-            <p class="font-gilroy text-start">{{ i.title }}</p>
-            <span class="text-white mt-2 text-start">{{ i.job }}</span>
+    <div class="main-content">
+      <div v-for="i in items" :key="i.id" class="carousel izo">
+        <div class="image-wrapper relative">
+          <img src="@/assets/images/img_1.png" alt="" class="w-full h-full test">
+          <div class="gradient-overlay absolute bottom-0 left-0"></div>
+          <div class="main-text">
+            <p class="font-gilroy">{{ i.name }}</p>
+            <span>{{ i.position }}</span>
           </div>
         </div>
+      </div>
     </div>
     <div class="mobile-has">
       <router-link to="/famous-persons">
@@ -108,34 +78,62 @@ export default {
 .main {
   padding: 64px 0;
   @apply w-full;
-}
-.content {
-  @apply flex justify-between relative mx-auto;
-  width: 75%;
-}
-.content-f {
-  @apply flex justify-between mx-auto items-center;
-  width: 75%;
-  padding-bottom: 56px;
-  h2 {
-    font-size: 40px; line-height: 52px; font-weight: 500;
+  .main-title {
+    @apply flex justify-between mx-auto items-center;
+    width: 75%;
+    padding-bottom: 56px;
+    h2 {
+      font-size: 40px; line-height: 52px; font-weight: 500;
+    }
   }
-}
-.izo {
-  border-radius: 6px;
-  max-width: 288px;
-  max-height: 384px;
-  @apply bg-gray-100;
-
-  .izo-item {
-    background-color: #0072AB;
+  .main-content {
+    @apply flex justify-between relative mx-auto;
+    width: 75%;
+    .carousel {
+      @aaply bg-gray-100 relative overflow-hidden;
+      border-radius: 6px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .gradient-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(to top, rgba(0, 114, 171, 0.8), transparent);
+      z-index: 1;
+      transition: height 0.3s ease-in-out;
+      pointer-events: none;
+    }
+    .carousel:hover .gradient-overlay {
+      height: 100%;
+    }
+    .main-text {
+      @apply absolute bottom-0 left-0 p-10;
+      opacity: 0;
+      transform: translateY(100%); /* Текст изначально снизу */
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      p {
+        @apply text-start;
+        font-size: 24px; font-weight: 500; color: white;
+      }
+      span {
+        @apply text-white mt-2 text-start;
+        font-size: 14px;
+      }
+    }
+    .carousel:hover .main-text {
+      opacity: 1; /* Текст становится видимым */
+      transform: translateY(0); /* Текст поднимается на исходную позицию */
+      z-index: 20;
+    }
   }
-}
-p {
-  font-size: 24px; font-weight: 500; color: white;
-}
-span {
-  font-size: 14px;
 }
 .mobile-has {
   display:none;
@@ -144,25 +142,42 @@ span {
   .hide {
     display: none;
   }
+
   .main {
     padding: 48px 0;
-    @apply w-full;
-  }
-  .content {
-    width: 90%;
-    @apply gap-5;
-  }
-  .content-f {
-    width: 90%;
-    h2 {
-      font-size: 28px;
+    .main-title {
+      width: 90%;
+      h2 {
+        font-size: 28px;
+      }
     }
-  }
-  p {
-    font-size: 18px;
-  }
-  span {
-    font-size: 12px;
+    .main-content {
+      width: 90%;
+      @apply gap-5;
+      .carousel {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .gradient-overlay {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0, 114, 171, 1), transparent);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .main-text {
+        @apply p-3;
+        opacity: 1;
+        z-index: 20;
+        transform: translateY(0);
+        p {
+          font-size: 18px;
+        }
+        span {
+          font-size: 12px;
+        }
+      }
+    }
   }
 }
 @media (max-width : 760px) {
