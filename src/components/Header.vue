@@ -1,20 +1,18 @@
 <script>
 import axios from "axios";
+import api from "@/assets/axios";
 
 export default {
   name: 'MainHeader',
   data() {
     return {
       lists: null ,
+      to: ['/about-us',"/regions/guide",'/documents', '/press-center', '/famous-persons', '/contacts/republic-contacts'],
       title:{},
       address: "",
       phone: "",
       isSidebarActive: false,
-      languages: [
-        { code: 'ru', name: 'Рус' },
-        { code: 'en', name: 'English' },
-        { code: 'kz', name: 'Қаз' }
-      ],
+      languages: [],
       isLanguageListVisible: false,
     }
   },
@@ -26,11 +24,31 @@ export default {
       return this.phone.replace(/\n/g, '<br>');
     }
   },
-  // mounted() {
-  //   this.fetchListMenu();
-  //   this.fetchContacts();
-  // },
+  mounted() {
+    this.RequestData();
+  },
   methods: {
+    RequestData(){
+      api.get('/navbars/', {
+        params: { lang_code: 'ru' },
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+      .then(response => {
+        this.lists = response.data.map(item => item.title);
+        console.log("test", this.lists);
+      })
+      .catch(error => {
+        if (error.response) {
+          console.error("Response error:", error.response.status, error.response.data);
+        } else if (error.request) {
+          console.error("No response received:", error.request);
+        } else {
+          console.error("Request setup error:", error.message);
+        }
+      });
+    },
     ReturnMainPage() {
       this.$router.push({ name: 'MainPage' });
     },
@@ -41,68 +59,12 @@ export default {
       this.isSidebarActive = !this.isSidebarActive;
     },
     toggleLanguageList() {
-      this.isLanguageListVisible = !this.isLanguageListVisible; // переключаем видимость
+      this.isLanguageListVisible = !this.isLanguageListVisible;
     },
     selectLanguage(languageCode) {
-      // Логика выбора языка, возможно вызов метода для смены языка
       console.log('Выбран язык:', languageCode);
-      this.isLanguageListVisible = false; // закрыть список после выбора языка
+      this.isLanguageListVisible = false;
     },
-    // fetchListMenu() {
-    //   axios.get('https://53ea-91-185-26-183.ngrok-free.app/navbars/?lang_code=ru', {
-    //     headers: {
-    //       'ngrok-skip-browser-warning': 'true'
-    //     }
-    //   })
-    //       .then(response => {
-    //         const serverData = response.data;
-    //
-    //         if (serverData && serverData.length > 0) {
-    //           this.lists = serverData.map((item, index) => {
-    //             const routes = ["/about-us", "/regions/guide", "/documents", "/press-center", "/famous-persons", "/contacts/republic-contacts"];
-    //
-    //             return {
-    //               name: item.title,
-    //               to: routes[index]
-    //             };
-    //           });
-    //         }
-    //         console.log("Меню обновлено с сервера:", this.lists);
-    //       })
-    //       .catch(error => {
-    //         if (error.response) {
-    //           console.error("Response error:", error.response.status, error.response.data);
-    //         } else if (error.request) {
-    //           console.error("No response received:", error.request);
-    //         } else {
-    //           console.error("Request setup error:", error.message);
-    //         }
-    //       });
-    // },
-    // fetchContacts() {
-    //   axios.get('https://53ea-91-185-26-183.ngrok-free.app/contacts/?lang_code=ru', {
-    //     headers: {
-    //       'ngrok-skip-browser-warning': 'true'
-    //     }
-    //   })
-    //       .then(response => {
-    //         const contactData = response.data[0];
-    //
-    //         if (contactData) {
-    //           this.address = contactData.address || this.address;
-    //           this.phone = contactData.phone1 + ',\n' + contactData.phone2;
-    //         }
-    //       })
-    //       .catch(error => {
-    //         if (error.response) {
-    //           console.error("Response error:", error.response.status, error.response.data);
-    //         } else if (error.request) {
-    //           console.error("No response received:", error.request);
-    //         } else {
-    //           console.error("Request setup error:", error.message);
-    //         }
-    //       });
-    // }
   }
 }
 </script>
@@ -127,7 +89,7 @@ export default {
       <div class="menu">
         <ul class="flex items-center gap-10">
           <li v-for="(list, id) in lists" :key="id" class="menu-item">
-            <router-link :to="list.to" :class="{ active: isActive(list.to) }">{{list.name}}</router-link>
+            <router-link :to="to[id]" :class="{ active: isActive(to[id]) }">{{list}}</router-link>
           </li>
         </ul>
       </div>
