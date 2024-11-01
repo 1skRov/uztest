@@ -8,7 +8,8 @@ export default {
   components: {SideBar, moreDetail},
   props:{
     data:{
-      type: Object
+      type: Object,
+      default: () => []
     }
   },
   data () {

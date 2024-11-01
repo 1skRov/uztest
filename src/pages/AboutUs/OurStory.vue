@@ -42,8 +42,10 @@ export default {
     };
   },
   mounted() {
-    this.updateSlidesPerView();
-    window.addEventListener('resize', this.updateSlidesPerView);
+    this.$nextTick(() => {
+      this.updateSlidesPerView();
+      window.addEventListener('resize', this.updateSlidesPerView);
+    });
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.updateSlidesPerView);
@@ -83,8 +85,12 @@ export default {
     },
     // Обновление позиции слайдера
     updateSliderPosition() {
-      const sliderWidth = this.$refs.slider.offsetWidth / this.slidesPerView;
-      this.$refs.slider.style.transform = `translateX(-${this.currentSlide * sliderWidth * this.slidesPerView}px)`;
+      if (this.$refs.slider) {
+        const sliderWidth = this.$refs.slider.offsetWidth / this.slidesPerView;
+        this.$refs.slider.style.transform = `translateX(-${this.currentSlide * sliderWidth * this.slidesPerView}px)`;
+      } else {
+        console.warn('Slider ref is not available');
+      }
     },
   },
 }

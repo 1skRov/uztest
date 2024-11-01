@@ -7,7 +7,8 @@ export default {
   components: {moreDetail, SideBar},
   props :{
     data:{
-      type: Object
+      type: Object,
+      default: () => []
     }
   },
   data() {

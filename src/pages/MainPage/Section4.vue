@@ -12,31 +12,14 @@ export default {
       type: Boolean,
     },
     data: {
-      type: Object
+      type: Object,
+      default: () => []
     }
   },
   data() {
     return {
       page: "04",
       title:"узнать больше",
-      items: [
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        }
-      ]
     };
   },
 }
@@ -186,23 +169,26 @@ export default {
 @media (max-width : 760px) {
   .mobile-has {
     display: block;
+    width: 90%;
+    @apply mx-auto mt-5;
   }
   .mobile {
     display: none;
   }
   .main {
     padding: 32px 0;
-  }
-  .content {
-    width: 90%;
-    @apply mx-auto;
-  }
-  .content-f {
-    width: 90%;
-    @apply mx-auto;
-    padding-bottom: 24px;
-    h2 {
-      font-size: 24px;
+    .main-content{
+      .main-text {
+        opacity: 1;
+        z-index: 20;
+        transform: translateY(0);
+        p {
+          font-size: 14px;
+        }
+        span {
+          font-size: 10px;
+        }
+      }
     }
   }
 }

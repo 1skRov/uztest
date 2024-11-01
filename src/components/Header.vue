@@ -134,8 +134,8 @@ export default {
           </svg>
         </div>
       </div>
-      <div class="flex items-center px-5" style="border-left: 1px solid #EBEEF0">
-        <button @click="toggleSidebar" class="menu-button">
+      <div class="menu-button" style="">
+        <button @click="toggleSidebar">
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path d="M3 6h18M3 12h18M3 18h18" stroke="#333" stroke-width="2"/>
           </svg>
@@ -230,6 +230,8 @@ export default {
 @media (max-width : 992px) {
   .menu-button {
     display: block;
+    border-left: 1px solid #EBEEF0;
+    @apply flex items-center px-5;
   }
   .menu {
     display: none;
