@@ -9,6 +9,7 @@ import YouthOrganizations from "@/pages/AboutUs/YouthOrganizations.vue";
 import EducationAndSport from "@/pages/AboutUs/EducationAndSport.vue";
 import Help from "@/pages/AboutUs/Help.vue";
 import axiosInstance from '@/assets/axios.js';
+import api from "@/assets/axios.js";
 
 export default {
   name: "AboutUs",
@@ -20,10 +21,12 @@ export default {
     return {
       sections: ['кто мы','наша история','культура','личности','молодежные организации','образование и спорт','помощь',],
       currentSection: 0,
+      s1: {},
+      s2: {},
     }
   },
   mounted() {
-    this.getData(); // Запрос к серверу для получения данных
+    this.about();
     const observer = new IntersectionObserver(this.handleIntersection, {
       threshold: 0.3,
     });
@@ -32,14 +35,38 @@ export default {
     sectionElements.forEach((section) => observer.observe(section));
   },
   methods: {
-    getData() {
-      axiosInstance
-          .get('/documents')  // Не нужно указывать базовый URL, так как он задан в axiosConfig
+    about() {
+      api.get('/informations/', {
+        params: { lang_code: 'ru' },
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
           .then(response => {
-            console.log('Полученные данные:', response.data);
+            const groupedData = response.data.reduce((acc, item) => {
+              if (!acc[item.category_id]) {
+                acc[item.category_id] = [];
+              }
+              acc[item.category_id].push(item);
+              return acc;
+            }, {});
+
+            this.s1 = groupedData[10] ? groupedData[10][0] : {};
+            this.s2 = groupedData[11] ? groupedData[11] : [];
+            this.s3 = groupedData[4] ? groupedData[4][0] : {};
+            this.s4 = groupedData[5] ? groupedData[5] : [];
+            this.s5 = groupedData[6] ? groupedData[6][0] : {};
+            this.s6 = groupedData[9] ? groupedData[9][0] : {};
+            console.log("s1--->", this.s1);
           })
           .catch(error => {
-            console.error('Ошибка при получении данных:', error);
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
           });
     },
     handleIntersection(entries) {
@@ -72,10 +99,10 @@ export default {
         {{ sections[currentSection] }}
       </div>
       <div id="section-0" class="section mx-auto">
-        <WhoWeAre></WhoWeAre>
+        <WhoWeAre :data="s1"></WhoWeAre>
       </div>
       <div id="section-1" class="section mx-auto">
-        <OurStory></OurStory>
+        <OurStory :data="s2"></OurStory>
       </div>
       <div class="w-full relative" style="background-color: #F7F8FA">
         <div class="absolute right-0 bottom-0">

@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 import api from "@/assets/axios";
 
 export default {

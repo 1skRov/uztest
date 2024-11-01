@@ -5,9 +5,15 @@ import PrevBtn from "@/components/buttons/prevBtn.vue";
 export default {
   name: "OurStory",
   components: {PrevBtn, NextBtn},
+  props:{
+    data:{
+      type:Object
+    }
+  },
   data() {
     return {
       currentSlide: 0,
+      test:"",
       slidesPerView: 3,// Текущий активный слайд
       slides: [
         {
@@ -38,6 +44,8 @@ export default {
   mounted() {
     this.updateSlidesPerView();
     window.addEventListener('resize', this.updateSlidesPerView);
+    this.test = this.data.map(item => item.title);
+    console.log("cat", this.test);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.updateSlidesPerView);
@@ -87,7 +95,7 @@ export default {
 <template>
   <div class="slider-container">
     <div class="w-full flex items-center justify-between hide-t" style="margin-bottom: 56px;">
-      <h2 class="font-gilroy slider-title">Наша история</h2>
+      <h2 class="font-gilroy slider-title">{{ data.category_id }}</h2>
       <div class="flex gap-4 items-center">
         <prev-btn @click="scrollLeft"/>
         <next-btn @click="scrollRight"/>
