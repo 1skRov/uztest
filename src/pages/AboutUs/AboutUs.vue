@@ -8,7 +8,6 @@ import FamousPersons from "@/pages/AboutUs/FamousPersons.vue";
 import YouthOrganizations from "@/pages/AboutUs/YouthOrganizations.vue";
 import EducationAndSport from "@/pages/AboutUs/EducationAndSport.vue";
 import Help from "@/pages/AboutUs/Help.vue";
-import axiosInstance from '@/assets/axios.js';
 import api from "@/assets/axios.js";
 
 export default {
@@ -23,6 +22,12 @@ export default {
       currentSection: 0,
       s1: {},
       s2: {},
+      s3: {},
+      s4: {},
+      s5: {},
+      s6: {},
+      s7: {},
+      s8: {},
     }
   },
   mounted() {
@@ -53,10 +58,12 @@ export default {
 
             this.s1 = groupedData[10] ? groupedData[10][0] : {};
             this.s2 = groupedData[11] ? groupedData[11] : [];
-            this.s3 = groupedData[4] ? groupedData[4][0] : {};
+            this.s3 = groupedData[4] && groupedData[4].length > 1 ? groupedData[4][1] : {};
             this.s4 = groupedData[5] ? groupedData[5] : [];
-            this.s5 = groupedData[6] ? groupedData[6][0] : {};
-            this.s6 = groupedData[9] ? groupedData[9][0] : {};
+            this.s5 = groupedData[12] ? groupedData[12][0] : {};
+            this.s6 = groupedData[13] ? groupedData[13][0] : {};
+            this.s7 = groupedData[14] ? groupedData[14][0] : {};
+            this.s8 = groupedData[15] ? groupedData[15][0] : {};
             console.log("s1--->", this.s1);
           })
           .catch(error => {
@@ -83,7 +90,7 @@ export default {
 
 <template>
   <div class="w-full flex relative">
-    <div style="width: 160px; height: 100%; border-right: 1px solid #EBEEF0; position: absolute; top:0" class="hid">
+    <div style="width: 160px; height: 100%; border-right: 1px solid #EBEEF0; position: absolute; top:0; z-index:1000" class="hid">
       <div style="position: sticky; top:120px;">
         <ul>
           <li v-for="(section, index) in sections" :key="index" class="cursor-pointer">
@@ -95,7 +102,7 @@ export default {
     </div>
 
     <div class="w-full">
-      <div class="text-box flex-wrap hid" style="width:140px; position: fixed; top:140px; left: 120px; padding: 12px 24px;">
+      <div class="text-box flex-wrap hid" style="width:140px; position: fixed; top:140px; left: 120px; padding: 12px 24px; z-index:1000">
         {{ sections[currentSection] }}
       </div>
       <div id="section-0" class="section mx-auto">
@@ -109,20 +116,20 @@ export default {
           <img src="@/assets/images/vector-culture.png" alt="">
         </div>
         <div class="section mx-auto" id="section-2">
-          <CultureAndTradition></CultureAndTradition>
+          <CultureAndTradition :data="s3"></CultureAndTradition>
         </div>
       </div>
       <div id="section-3" class="section mx-auto">
-        <FamousPersons/>
+        <FamousPersons :data="s4"/>
       </div>
       <div id="section-4" class="section mx-auto">
-        <YouthOrganizations/>
+        <YouthOrganizations :data="s5"/>
       </div>
       <div id="section-5" class="section mx-auto">
-        <EducationAndSport/>
+        <EducationAndSport :data-ed="s6" :data-sp="s7"/>
       </div>
       <div id="section-6" class="section mx-auto hid hid-p">
-        <Help/>
+        <Help :data="s8"/>
       </div>
     </div>
     <router-view></router-view>

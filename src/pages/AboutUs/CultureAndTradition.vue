@@ -4,6 +4,11 @@ import more from "@/components/buttons/moreDetail.vue"
 export default {
   name: "CultureAndTradition",
   components: {more},
+  props:{
+    data:{
+      type: Object,
+    }
+  },
   data(){
     return {
       currentSlide: 0,
@@ -14,22 +19,6 @@ export default {
       ],
     };
   },
-  methods: {
-    prevSlide() {
-      if (this.currentSlide > 0) {
-        this.currentSlide--;
-      } else {
-        this.currentSlide = this.images.length - 1;
-      }
-    },
-    nextSlide() {
-      if (this.currentSlide < this.images.length - 1) {
-        this.currentSlide++;
-      } else {
-        this.currentSlide = 0;
-      }
-    },
-  },
 }
 </script>
 
@@ -37,31 +26,25 @@ export default {
   <div class="main">
     <div class="main-title">
       <h2 class="font-gilroy title">
-        Культура и традиция
+        {{ data.category_title }}
       </h2>
       <div class="flex gap-4 items-center btn-1">
-        <more  title="Узнать больше"/>
+        <more  :title="data.buttons_title"/>
       </div>
     </div>
     <div class="slider-container mb-14">
-      <img
-          class="w-full h-full rounded"
-          src="@/assets/images/img.png"
-          alt="Культура и традиция"
-      />
+      <img class="w-full h-full rounded" :src="data.image" alt="Культура и традиция"/>
     </div>
     <div>
       <h3 class="font-gilroy mb-10 title">
-        Филиалы “ЕПУК”
+        {{ data.title }}
       </h3>
       <span style="color: #575F6C" class="text">
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы. <br><br>
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы. <br><br>
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
+        {{data.full_desc}}
       </span>
     </div>
     <div class="flex gap-4 items-center btn-2">
-      <more title="Узнать больше" style="font-size: 12px"></more>
+      <more :title="data.buttons_title" style="font-size: 12px"></more>
     </div>
   </div>
 </template>

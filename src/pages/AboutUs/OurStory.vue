@@ -44,8 +44,6 @@ export default {
   mounted() {
     this.updateSlidesPerView();
     window.addEventListener('resize', this.updateSlidesPerView);
-    this.test = this.data.map(item => item.title);
-    console.log("cat", this.test);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.updateSlidesPerView);

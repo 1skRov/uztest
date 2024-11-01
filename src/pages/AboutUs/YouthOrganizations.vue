@@ -1,13 +1,18 @@
 <script>
 export default {
-  name: "YouthOrganizations"
+  name: "YouthOrganizations",
+  props:{
+    data:{
+      type: Object,
+    }
+  },
 }
 </script>
 
 <template>
   <div class="w-full main">
     <h2 class="font-gilroy">
-      Молодежные организации
+      {{data.category_title}}
     </h2>
     <div class="flex flex-col gap-5">
       <div class="flex gap-5">
@@ -16,13 +21,14 @@ export default {
           <div class="izo-item absolute inset-0 opacity-0 group-hover:opacity-80 flex flex-col justify-end items-center text-center transition-opacity duration-500 p-6">
           </div>
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end transition-opacity duration-700 p-6">
-            <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">Организация “Текст”</span>
+            <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
             <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
-              Единый Портал Узбеков Казахстана создан под эгидой Ассамблеи народа Казахстана с целью продвижения деятельности узбекских этнокультурных объединений всех уровней, в том числе Ассоциации этнокультурных общественных объединений узбеков РК "Дустлик".
+              {{ data.mini_desc }}
             </span>
             <div>
               <router-link to="/organization-details">
-                <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">подробнее</button>
+                <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">
+                  {{ data.buttons_title }}</button>
               </router-link>
             </div>
           </div>

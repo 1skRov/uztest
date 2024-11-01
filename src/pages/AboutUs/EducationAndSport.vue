@@ -12,6 +12,12 @@ export default {
     description:{
       type: String,
       default: '',
+    },
+    dataEd:{
+      type: Object,
+    },
+    dataSp:{
+      type: Object,
     }
   }
 }
@@ -20,28 +26,25 @@ export default {
 <template>
   <div class="main">
     <div class="w-full p-10" style="border: 1px solid #EBEEF0; border-radius: 8px">
-      <p class="font-gilroy title">Образование</p>
+      <p class="font-gilroy title">{{ dataEd.category_title }}</p>
       <span class="text">
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
-        <br><br>
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
-      </span>
+        {{ dataEd.full_desc }}</span>
       <div class="mt-6">
         <router-link to="/education">
-        <button class="uppercase font-medium text-base py-4 px-6 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">подробнее</button>
+        <button class="uppercase font-medium text-base py-4 px-6 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">
+          {{ dataEd.buttons_title }}</button>
         </router-link>
       </div>
     </div>
     <div class="w-full p-10" style="border: 1px solid #EBEEF0; border-radius: 8px">
-      <p class="font-gilroy title">Спорт</p>
+      <p class="font-gilroy title">{{ dataSp.category_title }}</p>
       <span class="text">
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
-        <br><br>
-        Идея создания и разработка данного Портала принадлежит председателю узбекского этнокультурного центра города Астана Ш.Пулатову при непосредственной поддержки спонсоров и партнеров из числа ниже указанных компаний и организаций. Отельную благодарность выражаем этнокультурному центру города Алматы в лице председателя А.Исматуллаева за поддержку и выражение солидарности в воплощении данной инициативы.
+        {{ dataSp.full_desc }}
       </span>
       <div class="mt-6">
         <router-link to="/sport">
-          <button class="uppercase font-medium text-base py-4 px-6 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">подробнее</button>
+          <button class="uppercase font-medium text-base py-4 px-6 text-white" style="border-radius: 6px; border: 1px solid #CFD3DA; background-color: #0072AB">
+            {{ dataSp.buttons_title }}</button>
         </router-link>
       </div>
     </div>

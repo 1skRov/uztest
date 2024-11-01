@@ -3,28 +3,15 @@ import moreDetail from "@/components/buttons/moreDetail.vue";
 export default {
   name: "FamousPersons",
   components: {moreDetail},
+  props:{
+    data:{
+      type:Object,
+    }
+  },
   data() {
     return {
       page: "04",
       title:"узнать больше",
-      items: [
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        },
-        {
-          name: "Пулатов Шерзод Аббозович",
-          position: "Председатель, член АНК, член НЭС АНК"
-        }
-      ]
     };
   }
 }
@@ -33,21 +20,21 @@ export default {
 <template>
   <div class="w-full main">
     <div style="padding-bottom: 56px" class="flex justify-between">
-      <h2 class="font-gilroy title">Известные личности</h2>
+      <h2 class="font-gilroy title">{{ data.category_title }}</h2>
       <div class="flex items-center">
         <router-link to="/famous-persons">
-          <moreDetail :title="title"/>
+          <moreDetail :title="data.buttons_title"/>
         </router-link>
       </div>
     </div>
     <div class="flex justify-between relative gap-3">
-      <div v-for="i in items" :key="i.id" class="carousel">
+      <div v-for="i in data" :key="i.id" class="carousel">
         <div class="image-wrapper">
-          <img src="@/assets/images/img_1.png" alt="" class="w-full h-full rounded">
+          <img :src="data.image" alt="f persons" class="w-full h-full rounded">
           <div class="gradient-overlay absolute bottom-0 left-0"></div>
           <div class="main-text">
-            <p class="font-gilroy">{{ i.name }}</p>
-            <span>{{ i.position }}</span>
+            <p class="font-gilroy">{{ i.title }}</p>
+            <span>{{ i.job }}</span>
           </div>
         </div>
       </div>

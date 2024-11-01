@@ -4,7 +4,12 @@ import NextBtn from "@/components/buttons/nextBtn.vue";
 
 export default {
   name: "Help",
-  components: {NextBtn, PrevBtn}
+  components: {NextBtn, PrevBtn},
+  props:{
+    data:{
+      type: Object,
+    }
+  }
 }
 </script>
 
@@ -12,13 +17,13 @@ export default {
   <div class="content">
     <div class="left">
       <p class="font-gilroy title">
-        Помощь нуждающимся
+        {{ data.category_title }}
       </p>
       <p class="description">
-        Благотворительные инициативы общества собирают с каждым разом всё больше участников, которые приносят лекарства, одежду, продукты, игрушки. Эти простые вещи обладают добавочной ценностью — они несут в себе тепло, заботу и стремление облегчить и украсить жизнь людей, находящихся в трудной жизненной ситуации.
+        {{ data.full_desc }}
       </p>
       <div class="btn">
-        <button>подробнее</button>
+        <button>{{ data.button_title }}</button>
         <div class="flex gap-6 items-center">
           <prev-btn/>
           <next-btn/>
@@ -27,13 +32,13 @@ export default {
     </div>
     <div class="w-full flex flex-shrink justify-center" style="">
       <img src="@/assets/images/img_2.png" class="w-auto h-auto">
+<!--      <img :src="data.image" class="w-auto h-auto">-->
     </div>
   </div>
 </template>
 
 <style scoped>
 .content {
-  width: 65%;
   border: 1px solid #EBEEF0;
   border-radius:8px;
   background: #FAFCFD;
@@ -59,9 +64,6 @@ export default {
   }
 }
 @media (max-width : 992px) {
-  .content {
-    width: 90%;
-  }
   .left {
     padding: 38px;
     .title {
