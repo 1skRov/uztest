@@ -21,34 +21,51 @@ export default {
 
 <template>
 <footer class="main">
-  <div class="flex items-start self-stretch" style="gap:56px">
-    <div class="flex flex-col items-start gap-10 self-stretch" v-for="list in lists" :key="list.id">
-      <div class="flex flex-col items-start gap-6" style="flex: 1 0 0">
-        <p class="self-stretch uppercase font-medium">{{list}}</p>
-        <div>
-          <ul>
-            <li v-for="content in contents1" class="flex flex-col items-start gap-4 self-stretch">
-              {{content}}
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div class="content">
+    <div class="sandbars">
+      <h2 class="main-text">О НАС</h2>
+      <p class="text">История</p>
+      <p class="text">Культура и традиции</p>
+      <p class="text">Наука и литература</p>
+      <p class="text">Известные личности</p>
+      <p class="text">Молодежные организации</p>
+      <p class="text">Образование</p>
+      <p class="text">Спорт</p>
     </div>
-    <div class="flex flex-col items-start gap-6" style="flex: 1 0 0">
-      <p class="self-stretch uppercase font-medium">Контакты</p>
-      <div>
-        <ul>
-          <li v-for="content in contents2">
-            {{content}}
-          </li>
-        </ul>
-      </div>
+    <div class="sandbars">
+      <h2 class="main-text">РЕГИОНЫ</h2>
+      <p class="text">Ассоциация узбеков РК "Дустлик"</p>
+      <p class="text">АСТАНА Узбекский ЭКЦ г. Астаны</p>
+      <p class="text">АЛМАТЫ Узбекский ЭКЦ г. Алматы</p>
+      <p class="text">Узбекский ЭКЦ г. Шымкент</p>
+      <p class="text">Все регионы</p>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">ДОКУМЕНТЫ</h2>
+      <p class="text">Устав</p>
+      <p class="text">План Ассоциации узбеков РК Дустлик на 2018 год</p>
+      <p class="text">Отчет Узбекского ЭКЦ г. Астаны за 2017 год</p>
+      <p class="text">Проекты</p>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">ПРЕСС ЦЕНТР</h2>
+      <p class="text">Последние новости</p>
+      <p class="text">Видео материалы</p>
+      <p class="text">Фотогалерея</p>
+      <p class="text">Интервью</p>
+      <p class="text">Благотворительная помощь</p>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">КОНТАКТЫ</h2>
+      <p class="text">Центральные контакты</p>
+      <p class="text">Региональные контакты</p>
+      <h2 class="main-text">Известные личности</h2>
       <div @click="openDonate" class="btn">
         донаты
       </div>
     </div>
   </div>
-  <div class="my-14" style="border-width: 1px 0px 1px 1px;border-style: solid;border-color: #EBEEF0;">
+  <div class="content-line">
     <div @click="ReturnMainPage" class="cursor-pointer icon">
       <svg width="120" height="60" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0H160V80H0V0Z" fill="#0072AB"/>
@@ -62,6 +79,51 @@ export default {
         <path d="M138.008 33.784C137.496 34.312 136.888 35 136.184 35.848C135.48 36.68 134.752 37.592 134 38.584C133.248 39.576 132.504 40.6 131.768 41.656C131.032 42.712 130.376 43.72 129.8 44.68H138.272V47.824H125.192V45.592C125.64 44.776 126.184 43.872 126.824 42.88C127.48 41.872 128.16 40.864 128.864 39.856C129.568 38.832 130.28 37.848 131 36.904C131.736 35.944 132.416 35.088 133.04 34.336H125.576V31.192H138.008V33.784Z" fill="white"/>
       </svg>
     </div>
+    <div class="item">
+      <div class="item-in">
+        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.6663 2.67969C11.525 2.67969 7.34338 6.86388 7.34338 12.0052C7.34338 17.9825 15.299 27.6922 15.6377 28.1016L16.6663 29.349L17.6949 28.1016C18.0336 27.6909 25.9892 17.9825 25.9892 12.0052C25.9892 6.86254 21.8076 2.67969 16.6663 2.67969ZM16.6663 5.34635C20.337 5.34635 23.3226 8.33454 23.3226 12.0052C23.3225 15.6119 19.1703 21.8149 16.6663 25.1016C14.1623 21.8176 10.0101 15.6172 10.0101 12.0052C10.0101 8.33454 12.9956 5.34635 16.6663 5.34635ZM16.6663 8.66667C14.825 8.66667 13.333 10.1587 13.333 12C13.333 13.8413 14.825 15.3333 16.6663 15.3333C18.5076 15.3333 19.9996 13.8413 19.9996 12C19.9996 10.1587 18.5076 8.66667 16.6663 8.66667Z" fill="#CFD3DA"/>
+        </svg>
+        <p class="text-sm">addres</p>
+      </div>
+      <div class="item-in">
+        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_345_284)">
+            <path d="M19.7624 14.1333L15.3874 12.2583C15.2005 12.1787 14.9928 12.1619 14.7956 12.2105C14.5983 12.2591 14.4222 12.3705 14.2937 12.5279L12.3562 14.8951C9.31545 13.4614 6.86837 11.0143 5.43469 7.97358L7.80188 6.03608C7.95957 5.90783 8.07117 5.73169 8.11981 5.53434C8.16844 5.33699 8.15145 5.12916 8.07141 4.94233L6.19641 0.567328C6.10856 0.365925 5.9532 0.201486 5.7571 0.102366C5.561 0.0032464 5.33645 -0.0243417 5.12219 0.0243589L1.05969 0.961859C0.853118 1.00956 0.668812 1.12587 0.536855 1.29181C0.404898 1.45775 0.333082 1.66352 0.33313 1.87553C0.33313 11.8951 8.45422 20.0005 18.4581 20.0005C18.6702 20.0007 18.8761 19.9289 19.0421 19.7969C19.2081 19.665 19.3245 19.4806 19.3722 19.274L20.3097 15.2115C20.3581 14.9962 20.3299 14.7707 20.23 14.5739C20.1301 14.3772 19.9648 14.2214 19.7624 14.1333Z" fill="#CFD3DA"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_345_284">
+              <rect width="20" height="20" fill="white" transform="translate(0.33313)"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <p class="text-sm">phone</p>
+      </div>
+    </div>
+  </div>
+  <div class="content-for-mob">
+    <div class="sandbars">
+      <h2 class="main-text">О НАС</h2>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">РЕГИОНЫ</h2>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">ДОКУМЕНТЫ</h2>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">ПРЕСС ЦЕНТР</h2>
+    </div>
+    <div class="sandbars">
+      <h2 class="main-text">КОНТАКТЫ</h2>
+    </div>
+  </div>
+  <div class="text-line">
+    <div class="text-end">© 2024 Единый Портал Узбеков Казахстана</div>
+    <div class="text-line">
+      <div class="text-end">Политика конфиденциальности</div>
+      <div class="text-end">Все права защищены.</div>
+    </div>
   </div>
 </footer>
 </template>
@@ -71,21 +133,123 @@ export default {
   @apply flex w-full flex-col gap-5;
   padding: 56px 108px;
   background: #F7F8FA;
-}
-p {
-  color: #333;
-  font-size: 16px;
-}
-.btn {
-  @apply uppercase font-medium text-base py-4 px-6 text-white mt-4 cursor-pointer;
-  border-radius: 6px;
-  border: 1px solid #CFD3DA;
-  background-color: #0072AB;
+  .content {
+    @apply flex justify-between;
+    .sandbars {
+      width: 16%;
+      .text {
+        font-size: 16px;
+        @apply text-gray-400;
+      }
+      .main-text{
+        font-weight: 500;
+        color: black;
+        font-size: 16px;
+        margin-bottom:24px;
+      }
+      .btn {
+        @apply uppercase font-medium text-base py-4 px-6 text-white cursor-pointer text-center;
+        border-radius: 6px;
+        border: 1px solid #CFD3DA;
+        background-color: #0072AB;
+      }
+      .text, .main-text {
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      .text + .text {
+        margin-top: 16px;
+      }
+      .text + .main-text {
+        @apply my-6;
+      }
+    }
+  }
+  .content-line {
+    @apply my-14 flex;
+    border-width: 1px 0px 1px 1px;border-style: solid;border-color: #EBEEF0;
+    .item {
+      @apply flex items-center w-full gap-10 mx-auto justify-between;
+      .item-in {
+        @apply flex gap-4 items-center w-1/2 ml-20;
+      }
+    }
+  }
+  .text-line {
+    @apply flex justify-between;
+    .text-end {
+      @apply text-gray-400 text-start;
+      font-size:16px;
+    }
+    .text-end + .text-end {
+      @apply ml-4;
+    }
+  }
+  .content-for-mob {
+    display: none;
+  }
 }
 @media (max-width : 992px) {
   .main {
     padding: 48px 40px;
-    background: #F7F8FA;
+    .content {
+      .sandbars {
+        .text {
+          font-size: 14px;
+        }
+        .main-text{
+          font-size: 14px;
+        }
+        .btn {
+          font-size: 14px;
+        }
+      }
+    }
+    .text-line {
+      .text-end {
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width : 760px) {
+  .main {
+    padding: 32px 24px;
+    @apply gap-12;
+    .content {
+      display: none;
+    }
+    .content-line {
+      @apply my-0 flex flex-col gap-6;
+      border:none;
+      .item {
+        @apply flex flex-col items-start w-full;
+        .item-in {
+          @apply flex gap-4 items-center ml-0;
+        }
+      }
+    }
+    .text-line {
+      @apply flex flex-col gap-6;
+      .text-end {
+        font-size: 14px;
+      }
+      .text-end + .text-end {
+        @apply ml-0;
+      }
+    }
+    .content-for-mob {
+      @apply flex flex-col;
+      gap: 24px;
+      .sandbars {
+        .main-text{
+          font-weight: 500;
+          color: black;
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 </style>

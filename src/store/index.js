@@ -1,14 +1,20 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-  },
-  getters: {
+    currentLanguage: 'ru' // Язык по умолчанию
   },
   mutations: {
+    setLanguage(state, lang) {
+      state.currentLanguage = lang;
+    }
   },
   actions: {
+    changeLanguage({ commit }, lang) {
+      commit('setLanguage', lang);
+    }
   },
-  modules: {
+  getters: {
+    currentLanguage: state => state.currentLanguage
   }
-})
+});

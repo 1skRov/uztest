@@ -78,4 +78,10 @@ export default {
     line-height: 28px;
   }
 }
+@media (max-width : 760px) {
+  .main {
+    padding: 0 0 32px;
+    @apply flex flex-col;
+  }
+}
 </style>
