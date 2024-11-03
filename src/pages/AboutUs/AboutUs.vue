@@ -64,7 +64,7 @@ export default {
             this.s6 = groupedData[13] ? groupedData[13][0] : {};
             this.s7 = groupedData[14] ? groupedData[14][0] : {};
             this.s8 = groupedData[15] ? groupedData[15][0] : {};
-            console.log("s1--->", this.s1);
+            console.log("title", response.data);
           })
           .catch(error => {
             if (error.response) {
@@ -113,7 +113,10 @@ export default {
       </div>
       <div class="w-full relative" style="background-color: #F7F8FA">
         <div class="absolute right-0 bottom-0">
-          <img src="@/assets/images/vector-culture.png" alt="">
+          <img src="@/assets/images/cult-bottom.png" alt="">
+        </div>
+        <div class="absolute right-0 top-0">
+          <img src="@/assets/images/cult-top.png" alt="">
         </div>
         <div class="section mx-auto" id="section-2">
           <CultureAndTradition :data="s3"></CultureAndTradition>
