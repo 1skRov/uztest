@@ -1,9 +1,10 @@
 <script>
 import SideBar from "@/pages/MainPage/SideBar.vue";
 import moreDetail from "@/components/buttons/moreDetail.vue";
+import MapList from "@/components/map.vue";
 export default {
   name: "Section5",
-  components: {moreDetail, SideBar},
+  components: {MapList, moreDetail, SideBar},
   props:{
     data:{
       type: Object,
@@ -24,7 +25,7 @@ export default {
     <div class="hide">
       <SideBar :page="page"/>
     </div>
-    <div class="content">
+    <div class="content w-full">
       <div class="content-title">
         <div>
           <h2 class="font-gilroy">{{ data.category_title }}</h2>
@@ -34,11 +35,8 @@ export default {
           <moreDetail :title="data.buttons_title"/>
         </router-link>
       </div>
-      <div class="content-body relative">
-        <div class="absolute top-0 left-0">
-          <p>{{ data.full_desc }}</p>
-        </div>
-        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full">
+      <div class="content-body">
+        <map-list/>
       </div>
       <router-link to="/regions/guide" class="btn-has">
         <moreDetail :title="data.buttons_title"/>

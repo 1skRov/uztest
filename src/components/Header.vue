@@ -166,8 +166,8 @@ export default {
     <div class="sidebar-overlay" v-if="isSidebarActive" @click="toggleSidebar"></div>
     <div class="sidebar" :class="{ active: isSidebarActive }">
       <ul>
-        <li v-for="(list, id) in lists" :key="id">
-          <router-link :to="list.to" @click.native="toggleSidebar">{{ list.name }}</router-link>
+        <li v-for="(list, id) in lists" :key="id" class="menu-item">
+          <router-link :to="to[id]" :class="{ active: isActive(to[id]) }">{{list}}</router-link>
         </li>
       </ul>
       <div class="flex mob">

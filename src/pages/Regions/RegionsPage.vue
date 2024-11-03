@@ -3,10 +3,11 @@ import NextBtn from "@/components/buttons/nextBtn.vue";
 import PrevBtn from "@/components/buttons/prevBtn.vue";
 import FamousPersonItem from "@/pages/FamousPersonsPage/FamousPersonItem.vue";
 import SideBarText from "@/components/SideBarText.vue";
+import MapList from "@/components/map.vue";
 
 export default {
   name: "RegionsPage",
-  components: {SideBarText, FamousPersonItem, PrevBtn, NextBtn},
+  components: {MapList, SideBarText, FamousPersonItem, PrevBtn, NextBtn},
   data() {
     return{
       title:"Регионы"
@@ -26,11 +27,8 @@ export default {
       <div class="map-title flex justify-between">
         <h2 class="font-gilroy">Этнокультурный центр узбеков Казахстана</h2>
       </div>
-      <div class="relative map-title">
-        <div class="absolute top-0 left-0">
-          <p class="text-sm" style="color: #575F6C">Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
-        </div>
-        <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full" style="fill: none">
+      <div class="map-img">
+        <MapList></MapList>
       </div>
     </div>
     <div class="cursor-pointer map-title">
@@ -73,6 +71,10 @@ export default {
   @apply mx-auto;
   width:65%;
   margin-bottom: 40px;
+}
+.map-img {
+  @apply mx-auto relative;
+  width:65%;
 }
 .item {
   @apply py-2.5 px-6 text-base mx-auto w-full text-center;

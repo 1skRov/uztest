@@ -21,6 +21,7 @@ import Documents from "@/pages/Documents/Documents.vue";
 import OrganizationDetails from "@/pages/AboutUs/OrganizationDetails.vue";
 import Sport from "@/pages/AboutUs/Sport.vue";
 import Education from "@/pages/AboutUs/Education.vue";
+import notFound from "@/components/404.vue"
 
 const routes = [
   {
@@ -147,6 +148,11 @@ const routes = [
     path: '/person-detail',
     name: 'person-detail',
     component: FamousPersonDetailed
+  },
+  {
+    path: '/:pathMatch(.*)*', // Обозначает любой неопределенный путь
+    name: '404',
+    component: notFound,
   }
 ]
 

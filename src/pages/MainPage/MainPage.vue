@@ -6,6 +6,7 @@ import Section4 from "@/pages/MainPage/Section4.vue";
 import Section5 from "@/pages/MainPage/Section5.vue";
 import Section6 from "@/pages/MainPage/Section6.vue";
 import api from "@/assets/axios";
+import { mapGetters } from 'vuex';
 export default {
   name: "MainPage",
   components: {
@@ -18,6 +19,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       s1: {},
       s2: {},
       s3: {},
@@ -26,13 +28,22 @@ export default {
       s6: {},
     }
   },
+  computed: {
+    ...mapGetters(['currentLanguage'])
+  },
+  watch: {
+    currentLanguage(newLang) {
+      this.main(newLang);
+    }
+  },
   mounted() {
-    this.main();
+    this.main(this.currentLanguage);
   },
   methods: {
-    main() {
+    main(langCode) {
+      this.isLoading = true;
       api.get('/informations/', {
-        params: { lang_code: 'ru' },
+        params: { lang_code: langCode },
         headers: {
           'ngrok-skip-browser-warning': 'true'
         }
@@ -62,7 +73,10 @@ export default {
             } else {
               console.error("Request setup error:", error.message);
             }
-          });
+          })
+          .finally(() => {
+              this.isLoading = false;
+            });
     }
   }
 }
@@ -70,23 +84,58 @@ export default {
 
 <template>
   <div class="w-full">
-    <Section1 :data="s1"/>
-    <div class="tablet">
-      <Section3 :data="s3"/>
+    <div v-if="isLoading" class="loading-overlay">
+      <div class="loader"></div>
     </div>
-    <Section2 :data="s2"/>
-    <div class="mobile">
-      <Section3 :data="s3"/>
+    <div v-else>
+      <Section1 :data="s1"/>
+      <div class="tablet">
+        <Section3 :data="s3"/>
+      </div>
+      <Section2 :data="s2"/>
+      <div class="mobile">
+        <Section3 :data="s3"/>
+      </div>
+      <Section4 :data="s4"/>
+      <Section5 :data="s5"/>
+      <Section6 :data="s6"/>
     </div>
-    <Section4 :data="s4"/>
-    <Section5 :data="s5"/>
-    <Section6 :data="s6"/>
   </div>
 </template>
 
 <style scoped>
 .tablet {
   display: none;
+}
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #0072AB;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @media (max-width : 760px) {
   .mobile {
@@ -96,4 +145,5 @@ export default {
     display: flex;
   }
 }
+
 </style>
