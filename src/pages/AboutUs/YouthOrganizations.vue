@@ -6,6 +6,17 @@ export default {
       type: Object,
     }
   },
+  data() {
+    return {
+      images: [
+        require('@/assets/images/img.png'),
+        require('@/assets/images/img.png'),
+        require('@/assets/images/img.png'),
+        require('@/assets/images/img.png'),
+        require('@/assets/images/img.png'),
+      ]
+    }
+  }
 }
 </script>
 
@@ -14,45 +25,116 @@ export default {
     <h2 class="font-gilroy">
       {{data.category_title}}
     </h2>
-    <div class="flex flex-col gap-5">
-      <div class="flex gap-5">
-        <div class="image-block_1 izo relative group">
-          <img src="@/assets/images/img.png" alt="Image 1" style="width: 100%; height: 100%"/>
-          <div class="izo-item absolute inset-0 opacity-0 group-hover:opacity-80 flex flex-col justify-end items-center text-center transition-opacity duration-500 p-6">
-          </div>
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end transition-opacity duration-700 p-6">
-            <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
-            <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
+    <div class="gallery">
+      <div class="row">
+        <div
+            class="gallery-item"
+            v-for="(image, index) in images.slice(0, 2)"
+            :key="index"
+        >
+          <div class="overlay-container">
+            <img :src="image" alt="Изображение">
+            <div class="overlay">
+              <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
+              <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
               {{ data.mini_desc }}
             </span>
-            <div>
-              <router-link to="/organization-details">
-                <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">
-                  {{ data.buttons_title }}</button>
-              </router-link>
+              <div>
+                <router-link to="/organization-details">
+                  <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">
+                    {{ data.buttons_title }}</button>
+                </router-link>
+              </div>
             </div>
           </div>
         </div>
-        <div class="image-block_1">
-          <img src="@/assets/images/img.png" alt="Image 1" style="width: 100%; height: 100%"/>
-        </div>
       </div>
-      <div class="flex gap-5">
-        <div class="image-block_2">
-          <img src="@/assets/images/img.png" alt="Image 2" />
-        </div>
-        <div class="image-block_2">
-          <img src="@/assets/images/img.png" alt="Image 3" />
-        </div>
-        <div class="image-block_2">
-          <img src="@/assets/images/img.png" alt="Image 3" />
+      <div class="row">
+        <div
+            class="gallery-item"
+            v-for="(image, index) in images.slice(2, 5)"
+            :key="index"
+        >
+          <div class="overlay-container">
+            <img :src="image" alt="Изображение">
+            <div class="overlay">
+              <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
+              <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
+              {{ data.mini_desc }}
+            </span>
+              <div>
+                <router-link to="/organization-details">
+                  <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">
+                    {{ data.buttons_title }}</button>
+                </router-link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <style scoped>
+.overlay-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 114, 171, 0.7); /* Полупрозрачный синий цвет */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-text {
+  color: white;
+  font-size: 18px; /* Измените размер шрифта по необходимости */
+  font-weight: 500; /* Измените, чтобы подстроить под ваши требования */
+  text-align: center;
+}
+
+.overlay-container:hover .overlay {
+  opacity: 1;
+}
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery .row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.gallery .gallery-item {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.gallery .gallery-item img {
+  width: 100%;
+  height: auto;
+}
 .main {
   padding: 0 0 80px;
 
@@ -60,29 +142,6 @@ export default {
     font-weight: 500; font-size:40px;
   }
 }
-.izo {
-  border-radius: 6px;
-  width: 288px;
-  height: 384px;
-  @apply bg-gray-100;
-
-  .izo-item {
-    background-color: #0072AB;
-  }
-}
-.image-block_1, .image-block_2 > img {
-  @apply rounded h-full w-full;
-}
-.image-block_1 {
-  height: 340px;
-  @apply bg-red-200;
-}
-.image-block_2 {
-  height: 390px;
-  @apply bg-red-200;
-}
-
-
 @media (max-width : 992px) {
   .main {
     padding: 0 0 48px;

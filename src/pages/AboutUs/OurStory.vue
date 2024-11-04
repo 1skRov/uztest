@@ -14,18 +14,33 @@ export default {
     return {
       currentSlide: 0,
       test:"",
-      slidesPerView: 3,// Текущий активный слайд
+      slidesPerView: 3,
       slides: [
         {
           year: "1995 год",
           description:
               "Общественное объединение «Узбекский национальный культурный центр города Астана»...",
-          image: require('@/assets/images/famous-pers.jpg'),
+          image: require('@/assets/images/1.png'),
         },
         {
           year: "1996 год",
           description:
               "В этот год центр достиг новых успехов и провел множество мероприятий...",
+          image: require('@/assets/images/1.png'),
+        },
+        {
+          year: "1997 год",
+          description: "С начала 1997 года началась активная работа с молодёжью...",
+          image: require('@/assets/images/1.png'),
+        },
+        {
+          year: "1997 год",
+          description: "С начала 1997 года началась активная работа с молодёжью...",
+          image: require('@/assets/images/1.png'),
+        },
+        {
+          year: "1997 год",
+          description: "С начала 1997 года началась активная работа с молодёжью...",
           image: require('@/assets/images/1.png'),
         },
         {
@@ -107,9 +122,9 @@ export default {
     </div>
     <div class="relative overflow-hidden w-full">
       <div class="slider-content flex gap-6 overflow" ref="slider">
-        <div class="slide group relative flex" v-for="(slide, index) in slides" :key="index">
+        <div class="slide group relative flex" v-for="(slide, index) in slides" :key="index" style="flex: 1;">
           <div>
-            <img :src="slide.image" alt="Slide Image" class="w-full h-full object-cover items-center" />
+            <img :src="slide.image" alt="Slide Image" class="w-full h-auto" />
           </div>
           <div style="background-color: #0072AB;" class="overflow-hidden absolute inset-0 opacity-0 group-hover:opacity-80 flex flex-col justify-end items-center text-center transition-opacity duration-500 p-6">
           </div>
