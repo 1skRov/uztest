@@ -114,7 +114,7 @@ export default {
 <template>
   <div class="slider-container">
     <div class="w-full flex items-center justify-between hide-t" style="margin-bottom: 56px;">
-      <h2 class="font-gilroy slider-title">{{ data.category_id }}</h2>
+      <h2 class="font-gilroy slider-title">{{ data.category_title }}</h2>
       <div class="flex gap-4 items-center">
         <prev-btn @click="scrollLeft"/>
         <next-btn @click="scrollRight"/>
@@ -131,6 +131,8 @@ export default {
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end items-center text-center transition-opacity duration-700 p-6">
             <p class="font-gilroy text-start" style="font-size: 24px; font-weight: 500; color: white">{{ slide.year }}</p>
             <span class="text-white mt-2 text-start" style="font-size: 14px">{{ slide.description }}</span>
+<!--            <p class="font-gilroy text-start" style="font-size: 24px; font-weight: 500; color: white">{{ slide.title }}</p>-->
+<!--            <span class="text-white mt-2 text-start" style="font-size: 14px">{{ slide.ful_desc }}</span>-->
           </div>
         </div>
       </div>

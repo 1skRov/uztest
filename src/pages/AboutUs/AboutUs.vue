@@ -147,7 +147,7 @@ export default {
       <div id="section-5" class="section mx-auto">
         <EducationAndSport :data-ed="s6" :data-sp="s7"/>
       </div>
-      <div id="section-6" class="section mx-auto hid hid-p">
+      <div id="section-6" class="section mx-auto hid hid-p mb-12">
         <Help :data="s8"/>
       </div>
     </div>
