@@ -2,28 +2,40 @@
 import MainHeader from "@/components/Header.vue";
 import FooterPage from "@/components/Footer.vue";
 import MainPage from "@/pages/MainPage/MainPage.vue";
-
-
-// const authStore = useAuthStore();
+import MapList from "@/components/map.vue";
+import api from "@/assets/axios";
+import Loading from "vue-loading-overlay";
 export default {
   name: "MemberAssociation",
-  components: {MainPage, FooterPage, MainHeader},
+  components: {Loading, MapList, MainPage, FooterPage, MainHeader},
   data() {
     return {
       formData: {
         name: '',
         date_birth: '',
         iin: '',
-        phone: '',
+        phone_number: '',
       },
+      isLoading:false
     };
   },
   methods: {
     closeModal() {
       this.$router.push('/')
     },
-    send(){
-      this.closeModal();
+    async send() {
+      try {
+        this.isLoading = true;
+        const response = await api.post('/jointogroups/', this.formData);
+        console.log('Ответ сервера:', response.data);
+        this.closeModal();
+      } catch (error) {
+        console.error('Ошибка при отправке данных:', error);
+        alert('Произошла ошибка при отправке данных');
+      }
+      finally {
+        this.isLoading = false;
+      }
     }
   },
 }
@@ -32,6 +44,15 @@ export default {
 
 <template>
   <div class="flex flex-col h-screen w-full">
+    <loading
+        :active.sync="isLoading"
+        :is-full-page="true"
+        color="#0072AB"
+        backgroundColor="rgba(255, 255, 255, 0.8)"
+        loader="dots"
+        width="64px"
+        height="64px"
+    ></loading>
     <header class="w-full">
       <main-header/>
     </header>
@@ -70,16 +91,13 @@ export default {
             <!-- Телефон -->
             <div>
               <label class="label" for="phone">ВАШ ТЕЛЕФОН НОМЕР:</label>
-              <input type="text" id="phone" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.phone" required>
+              <input type="text" id="phone" class="w-full border border-gray-300 rounded p-2 bg-white" v-model="formData.phone_number" required>
             </div>
 
             <!-- Кнопка отправки -->
           </form>
           <div class="content-body relative">
-            <div class="absolute top-0 left-0">
-              <p>Sed ut perspiciatis unde omnis iste natus error sit <br> voluptatem accusantium doloremque laudantium,<br> totam rem aperiam.</p>
-            </div>
-            <img src="@/assets/images/map-removebg.png" alt="" class="w-full h-full">
+            <map-list/>
           </div>
           <div class="col-span-2">
             <button class="btn" type="submit" @click="send">Отправить</button>
@@ -87,9 +105,9 @@ export default {
         </div>
       </div>
     </div>
-<!--    <footer class="w-full">-->
-<!--      <FooterPage></FooterPage>-->
-<!--    </footer>-->
+    <footer class="w-full">
+      <FooterPage></FooterPage>
+    </footer>
   </div>
 </template>
 

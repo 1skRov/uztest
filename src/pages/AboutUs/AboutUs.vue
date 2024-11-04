@@ -9,13 +9,15 @@ import YouthOrganizations from "@/pages/AboutUs/YouthOrganizations.vue";
 import EducationAndSport from "@/pages/AboutUs/EducationAndSport.vue";
 import Help from "@/pages/AboutUs/Help.vue";
 import api from "@/assets/axios.js";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 export default {
   name: "AboutUs",
   components: {
     Help,
     EducationAndSport,
-    YouthOrganizations, FamousPersons, Section4, CultureAndTradition, OurStory, SideBar, WhoWeAre},
+    YouthOrganizations, FamousPersons, Section4, CultureAndTradition, OurStory, SideBar, WhoWeAre, Loading},
   data (){
     return {
       sections: ['кто мы','наша история','культура','личности','молодежные организации','образование и спорт','помощь',],
@@ -28,6 +30,7 @@ export default {
       s6: {},
       s7: {},
       s8: {},
+      isLoading: false
     }
   },
   mounted() {
@@ -41,6 +44,7 @@ export default {
   },
   methods: {
     about() {
+      this.isLoading = true;
       api.get('/informations/', {
         params: { lang_code: 'ru' },
         headers: {
@@ -74,6 +78,9 @@ export default {
             } else {
               console.error("Request setup error:", error.message);
             }
+          })
+        .finally(() => {
+            this.isLoading = false; // Завершение загрузки
           });
     },
     handleIntersection(entries) {
@@ -90,6 +97,15 @@ export default {
 
 <template>
   <div class="w-full flex relative">
+    <loading
+        :active.sync="isLoading"
+        :is-full-page="true"
+        color="#0072AB"
+        backgroundColor="rgba(255, 255, 255, 0.8)"
+        loader="dots"
+        width="64px"
+        height="64px"
+    ></loading>
     <div style="width: 160px; height: 100%; border-right: 1px solid #EBEEF0; position: absolute; top:0; z-index:1000" class="hid">
       <div style="position: sticky; top:120px;">
         <ul>
