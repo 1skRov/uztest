@@ -11,6 +11,7 @@ import Help from "@/pages/AboutUs/Help.vue";
 import api from "@/assets/axios.js";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import {mapGetters} from "vuex";
 
 export default {
   name: "AboutUs",
@@ -34,7 +35,7 @@ export default {
     }
   },
   mounted() {
-    this.about();
+    this.about(this.currentLanguage);
     const observer = new IntersectionObserver(this.handleIntersection, {
       threshold: 0.3,
     });
@@ -42,11 +43,19 @@ export default {
     const sectionElements = document.querySelectorAll('.section');
     sectionElements.forEach((section) => observer.observe(section));
   },
+  watch: {
+    currentLanguage(newLang) {
+      this.about(newLang);
+    }
+  },
+  computed: {
+    ...mapGetters(['currentLanguage'])
+  },
   methods: {
-    about() {
+    about(langCode) {
       this.isLoading = true;
       api.get('/informations/', {
-        params: { lang_code: 'ru' },
+        params: { lang_code: langCode },
         headers: {
           'ngrok-skip-browser-warning': 'true'
         }
@@ -134,7 +143,7 @@ export default {
         <div class="top-img absolute right-0 top-0">
           <img src="@/assets/images/cult-top.png" alt="">
         </div>
-        <div class="section section-carousel mx-auto" id="section-2">
+        <div class="section mx-auto" id="section-2">
           <CultureAndTradition :data="s3"></CultureAndTradition>
         </div>
       </div>
