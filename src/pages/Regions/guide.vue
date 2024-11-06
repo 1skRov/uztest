@@ -59,6 +59,7 @@ export default {
   <div v-for="i in persons" :key="i.id" class="item">
     <FamousPersonItem :person="i"/>
   </div>
+  <router-view></router-view>
 </div>
 </template>
 
