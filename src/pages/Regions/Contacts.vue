@@ -1,18 +1,67 @@
 <script>
+import api from "@/assets/axios";
+import Loading from "vue-loading-overlay";
+
 export default {
-  name: "Contacts"
+  name: "Contacts",
+  components: {Loading},
+  data() {
+    return {
+      contacts: {},
+      isLoading: false,
+    };
+  },
+  mounted(){
+    this.getContacts();
+  },
+  methods: {
+    getContacts() {
+      this.isLoading = true;
+      api.get('/contacts/', {
+        params: { lang_code: 'ru' },
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
+      })
+          .then(response => {
+            this.contacts = response.data[0];
+            console.log("title", this.contacts.address);
+          })
+          .catch(error => {
+            if (error.response) {
+              console.error("Response error:", error.response.status, error.response.data);
+            } else if (error.request) {
+              console.error("No response received:", error.request);
+            } else {
+              console.error("Request setup error:", error.message);
+            }
+          })
+          .finally(() => {
+            this.isLoading = false;
+          });
+    },
+  }
 }
 </script>
 
 <template>
 <div class="w-full flex gap-32" style="padding-bottom: 80px">
+  <loading
+      :active.sync="isLoading"
+      :is-full-page="true"
+      color="#0072AB"
+      backgroundColor="rgba(255, 255, 255, 0.8)"
+      loader="dots"
+      width="64px"
+      height="64px"
+  ></loading>
   <div class="flex flex-col gap-10">
     <div class="flex flex-col gap-6">
       <div class="flex items-center">
         <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.6663 2.67969C11.525 2.67969 7.34338 6.86388 7.34338 12.0052C7.34338 17.9825 15.299 27.6922 15.6377 28.1016L16.6663 29.349L17.6949 28.1016C18.0336 27.6909 25.9892 17.9825 25.9892 12.0052C25.9892 6.86254 21.8076 2.67969 16.6663 2.67969ZM16.6663 5.34635C20.337 5.34635 23.3226 8.33454 23.3226 12.0052C23.3225 15.6119 19.1703 21.8149 16.6663 25.1016C14.1623 21.8176 10.0101 15.6172 10.0101 12.0052C10.0101 8.33454 12.9956 5.34635 16.6663 5.34635ZM16.6663 8.66667C14.825 8.66667 13.333 10.1587 13.333 12C13.333 13.8413 14.825 15.3333 16.6663 15.3333C18.5076 15.3333 19.9996 13.8413 19.9996 12C19.9996 10.1587 18.5076 8.66667 16.6663 8.66667Z" fill="#0072AB"/>
         </svg>
-        <p class="text-base ml-6">Дом дружбы, г.Астана, пр.Б. Момышулы, 24/9, офис 21</p>
+        <p class="text-base ml-6">{{ contacts.address }}</p>
       </div>
       <div class="flex items-center">
         <svg class="ml-2" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,14 +74,14 @@ export default {
             </clipPath>
           </defs>
         </svg>
-        <p class="text-base ml-6">+7(701) 162 78-00,<br>
-          +7(701) 162 78-00.</p>
+        <p class="text-base ml-6">{{ contacts.phone1 }},<br>
+          {{ contacts.phone2 }}.</p>
       </div>
       <div class="flex items-center">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.33366 5.33337C3.86033 5.33337 2.66699 6.52671 2.66699 8.00004V24C2.66699 25.4734 3.86033 26.6667 5.33366 26.6667H26.667C28.1403 26.6667 29.3337 25.4734 29.3337 24V8.00004C29.3337 6.52671 28.1403 5.33337 26.667 5.33337H5.33366ZM5.33366 8.00004H26.667V9.33598L16.0003 16L5.33366 9.33598V8.00004ZM5.33366 12.0026L16.0003 18.6667L26.667 12.0026V24H5.33366V12.0026Z" fill="#0072AB"/>
         </svg>
-        <p class="text-base ml-6">uzbek.kz@info</p>
+        <p class="text-base ml-6">{{ contacts.email }}</p>
       </div>
     </div>
     <div>
@@ -60,8 +109,6 @@ export default {
         </svg>
       </div>
     </div>
-  </div>
-  <div style="border:1px solid #0072AB">
   </div>
 </div>
 </template>
