@@ -54,7 +54,15 @@ const routes = [
             path: 'guide',
             name: 'guide',
             component: Guide,
-            props: true
+            props: true,
+            children: [
+              {
+                path: 'person-detail/:id',
+                name: 'person-detail',
+                component: FamousPersonDetailed,
+                props: true,
+              },
+            ]
           },
           {
             path: 'information',
@@ -143,11 +151,6 @@ const routes = [
     path: '/member-association',
     name: 'member-association',
     component: MemberAssociation
-  },
-  {
-    path: '/person-detail',
-    name: 'person-detail',
-    component: FamousPersonDetailed
   },
   {
     path: '/:pathMatch(.*)*', // Обозначает любой неопределенный путь
