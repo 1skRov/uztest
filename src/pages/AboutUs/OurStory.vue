@@ -7,7 +7,8 @@ export default {
   components: {PrevBtn, NextBtn},
   props:{
     data:{
-      type:Object
+      type: Object,
+      default: () => []
     }
   },
   data() {
