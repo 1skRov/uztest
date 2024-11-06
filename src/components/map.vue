@@ -261,4 +261,9 @@ export default {
     transform: rotate(360deg);
   }
 }
+@media (max-width : 760px) {
+  .point-label {
+    font-size: 10px;
+  }
+}
 </style>

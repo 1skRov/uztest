@@ -1,6 +1,12 @@
 <script>
 export default {
   name: "FamousPersonItem",
+  props: {
+    person: {
+      type: Array,
+      default: () => []
+    }
+  },
   methods:{
     PersonDetail() {
       this.$router.push({ name: 'person-detail' })
@@ -16,10 +22,10 @@ export default {
   </div>
   <div class="flex items-center w-full">
     <div class="px-4 py-1.5">
-      <p class="font-gilroy">Пулатов Шерзод Аббозович</p>
-      <span class="text-lg" style="color:#575F6C">Председатель, член АНК, член НЭС АНК</span>
+      <p class="font-gilroy">{{ person.information_title }}</p>
+      <span class="text-lg job" style="color:#575F6C">{{ person.desc }}</span>
       <div class="mt-3">
-        <button @click="PersonDetail">подробнее</button>
+        <button @click="PersonDetail">{{ person.buttons_title }}</button>
       </div>
     </div>
   </div>
@@ -37,6 +43,13 @@ button {
   border-radius: 6px;
   border: 1px solid #CFD3DA;
   background-color: #0072AB;
+}
+.job {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (max-width : 992px) {
   p {

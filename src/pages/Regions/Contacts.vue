@@ -25,7 +25,6 @@ export default {
       })
           .then(response => {
             this.contacts = response.data[0];
-            console.log("title", this.contacts.address);
           })
           .catch(error => {
             if (error.response) {
