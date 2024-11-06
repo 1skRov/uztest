@@ -124,17 +124,17 @@ export default {
       <div id="section-0" class="section mx-auto">
         <WhoWeAre :data="s1"></WhoWeAre>
       </div>
-      <div id="section-1" class="section mx-auto">
+      <div id="section-1" class="section mx-auto section-carousel">
         <OurStory :data="s2"></OurStory>
       </div>
       <div class="w-full relative" style="background-color: #F7F8FA">
         <div class="absolute right-0 bottom-0">
           <img src="@/assets/images/cult-bottom.png" alt="">
         </div>
-        <div class="absolute right-0 top-0">
+        <div class="top-img absolute right-0 top-0">
           <img src="@/assets/images/cult-top.png" alt="">
         </div>
-        <div class="section mx-auto" id="section-2">
+        <div class="section section-carousel mx-auto" id="section-2">
           <CultureAndTradition :data="s3"></CultureAndTradition>
         </div>
       </div>
@@ -216,6 +216,9 @@ ul {
   .section {
     width: 90%;
   }
+  .top-img{
+    display: none;
+  }
 }
 @media (max-width : 760px) {
   .hid-p {
@@ -224,6 +227,10 @@ ul {
 
   .section {
     width: 90%;
+  }
+  .section-carousel {
+    width: 100%;
+    @apply mx-auto;
   }
 }
 </style>

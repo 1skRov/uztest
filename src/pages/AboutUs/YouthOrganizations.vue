@@ -288,7 +288,7 @@ export default {
     }
   }
 }
-@media (max-width : 992px) {
+@media (max-width : 760px) {
   .main {
     padding: 0 0 48px;
     h2 {

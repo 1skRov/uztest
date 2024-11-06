@@ -1,12 +1,13 @@
 <script>
 import NextBtn from "@/components/buttons/nextBtn.vue";
 import PrevBtn from "@/components/buttons/prevBtn.vue";
+import {Swiper, SwiperSlide} from "swiper/vue";
 
 export default {
   name: "OurStory",
-  components: {PrevBtn, NextBtn},
-  props:{
-    data:{
+  components: {Swiper, SwiperSlide, PrevBtn, NextBtn },
+  props: {
+    data: {
       type: Object,
       default: () => []
     }
@@ -14,8 +15,9 @@ export default {
   data() {
     return {
       currentSlide: 0,
-      test:"",
       slidesPerView: 3,
+      fill:"#fff",
+      isMobile: window.innerWidth < 768,
       slides: [
         {
           year: "1995 год",
@@ -39,37 +41,39 @@ export default {
           description: "С начала 1997 года началась активная работа с молодёжью...",
           image: require('@/assets/images/1.png'),
         },
-        {
-          year: "1997 год",
-          description: "С начала 1997 года началась активная работа с молодёжью...",
-          image: require('@/assets/images/1.png'),
-        },
-        {
-          year: "1997 год",
-          description: "С начала 1997 года началась активная работа с молодёжью...",
-          image: require('@/assets/images/1.png'),
-        },
-        {
-          year: "1997 год",
-          description: "С начала 1997 года началась активная работа с молодёжью...",
-          image: require('@/assets/images/1.png'),
-        },
       ],
     };
   },
   mounted() {
     this.$nextTick(() => {
       this.updateSlidesPerView();
-      window.addEventListener('resize', this.updateSlidesPerView);
+      window.addEventListener("resize", this.handleResize);
     });
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.updateSlidesPerView);
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
+    goNext() {
+      if (this.swiperInstance) {
+        this.swiperInstance.slideNext();
+      }
+    },
+    goPrev() {
+      if (this.swiperInstance) {
+        this.swiperInstance.slidePrev();
+      }
+    },
+    setSwiperInstance(swiper) {
+      this.swiperInstance = swiper;
+    },
+    handleResize() {
+      this.isMobile = window.innerWidth < 768;
+      this.updateSlidesPerView();
+    },
     updateSlidesPerView() {
-      if (window.innerWidth < 768) {
-        this.slidesPerView = 1;
+      if (this.isMobile) {
+        this.slidesPerView = 1; // Show one slide per view on mobile
       } else if (window.innerWidth < 1200) {
         this.slidesPerView = 2;
       } else {
@@ -85,7 +89,6 @@ export default {
       }
       this.updateSliderPosition();
     },
-    // Прокрутка вправо
     scrollRight() {
       if (this.currentSlide < Math.ceil(this.slides.length / this.slidesPerView) - 1) {
         this.currentSlide++;
@@ -94,22 +97,20 @@ export default {
       }
       this.updateSliderPosition();
     },
-    // Переход к конкретному слайду
     goToSlide(index) {
       this.currentSlide = index;
       this.updateSliderPosition();
     },
-    // Обновление позиции слайдера
     updateSliderPosition() {
       if (this.$refs.slider) {
         const sliderWidth = this.$refs.slider.offsetWidth / this.slidesPerView;
         this.$refs.slider.style.transform = `translateX(-${this.currentSlide * sliderWidth * this.slidesPerView}px)`;
       } else {
-        console.warn('Slider ref is not available');
+        console.warn("Slider ref is not available");
       }
     },
   },
-}
+};
 </script>
 
 <template>
@@ -121,7 +122,9 @@ export default {
         <next-btn @click="scrollRight"/>
       </div>
     </div>
-    <div class="relative overflow-hidden w-full">
+
+    <!-- Desktop Slider -->
+    <div v-if="!isMobile" class="relative overflow-hidden w-full">
       <div class="slider-content flex gap-6 overflow" ref="slider">
         <div class="slide group relative flex" v-for="(slide, index) in slides" :key="index" style="flex: 1;">
           <div>
@@ -132,13 +135,48 @@ export default {
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 flex flex-col justify-end items-center text-center transition-opacity duration-700 p-6">
             <p class="font-gilroy text-start" style="font-size: 24px; font-weight: 500; color: white">{{ slide.year }}</p>
             <span class="text-white mt-2 text-start" style="font-size: 14px">{{ slide.description }}</span>
-<!--            <p class="font-gilroy text-start" style="font-size: 24px; font-weight: 500; color: white">{{ slide.title }}</p>-->
-<!--            <span class="text-white mt-2 text-start" style="font-size: 14px">{{ slide.ful_desc }}</span>-->
           </div>
         </div>
       </div>
     </div>
-    <div class="flex justify-center mt-8">
+
+    <!-- Mobile Slider -->
+    <div v-if="isMobile" class="relative overflow-hidden w-full">
+      <div class="slider-content flex gap-6" ref="slider">
+        <swiper
+            :slides-per-view="1"
+            class="mySwiper"
+            @swiper="setSwiperInstance"
+        >
+          <swiper-slide class="slide group relative flex" v-for="(slide, index) in slides" :key="index" style="flex: 1;">
+            <div>
+              <div
+                  style="background-color: rgba(0, 114, 171, 0.7);"
+                  class="absolute inset-0 z-20"
+              ></div>
+              <div class="relative z-10">
+                <img :src="slide.image" alt="Slide Image" class="w-full h-auto" />
+              </div>
+              <div
+                  class="absolute inset-0 opacity-100 py-5 px-2 z-30"
+              >
+                <p class="font-gilroy text-start mb-2" style="font-size: 24px; font-weight: 500; color: white">
+                  {{ slide.year }}
+                </p>
+                <span class="text-white mt-2 text-start opacity-80 overflow-hidden" style="font-size: 14px">{{ slide.description }}</span>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+
+      <div class="absolute top-0 right-0 flex gap-4 justify-center p-4">
+        <prev-btn @click="goPrev" :fill="fill"/>
+        <next-btn @click="goNext" :fill="fill"/>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-8 dots">
       <span
           v-for="(slide, index) in Math.ceil(slides.length / slidesPerView)"
           :key="index"
@@ -148,8 +186,6 @@ export default {
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 .slider-container {
@@ -194,11 +230,26 @@ export default {
   .slider-title {
     font-size:28px;
   }
-
   .hide-t {
     margin-bottom: 48px;
   }
+}
 
+@media (max-width : 768px) {
+  .slider-container {
+    padding: 0;
+  }
+  .hide-t{
+    display: none;
+  }
+  .dots{
+    display: none;
+  }
+  .slider-content {
+    display: flex;
+  }
+  .slide {
+    min-width: 100%; /* Ensure one slide per view on mobile */
+  }
 }
 </style>
-

@@ -62,8 +62,8 @@ const routes = [
             component: Information,
           },
           {
-            path: 'regions-contacts',
-            name: 'regions-contacts',
+            path: 'contacts-region',
+            name: 'contacts-region',
             component: Contacts,
           }
         ]

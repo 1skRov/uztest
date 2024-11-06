@@ -1,12 +1,18 @@
 <script>
 export default {
-  name: "prevBtn"
+  name: "prevBtn",
+  props:{
+    fill:{
+      type:String,
+      default: '#0072AB',
+    }
+  }
 }
 </script>
 
 <template>
 <div class="cursor-pointer">
-  <svg fill="#0072AB" width="50px" height="50px" viewBox="-2.4 -2.4 28.80 28.80" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003" transform="rotate(0)">
+  <svg :fill="fill" width="50px" height="50px" viewBox="-2.4 -2.4 28.80 28.80" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003" transform="rotate(0)">
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.048"></g>
     <g id="SVGRepo_iconCarrier">

@@ -44,9 +44,9 @@ export default {
             :class="{ active: $route.path === '/regions/information' }">Информация</router-link>
 
         <router-link
-            to="/regions/contacts-info"
+            to="/regions/contacts-region"
             class="item"
-            :class="{ active: $route.path === '/regions/contacts-info' }">Контакты</router-link>
+            :class="{ active: $route.path === '/regions/contacts-region' }">Контакты</router-link>
       </div>
     </div>
     <div class="map-title">
