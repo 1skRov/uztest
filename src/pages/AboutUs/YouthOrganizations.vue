@@ -37,8 +37,8 @@ export default {
             <div class="overlay">
               <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
               <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
-              {{ data.mini_desc }}
-            </span>
+                {{ data.mini_desc }}
+              </span>
               <div>
                 <router-link to="/organization-details">
                   <button class="uppercase font-medium text-base py-4 px-6 bg-white" style="border-radius: 6px; border: 1px solid #CFD3DA">
@@ -58,9 +58,9 @@ export default {
           <div class="overlay-container">
             <img :src="image" alt="Изображение">
             <div class="overlay">
-              <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }}</span>
+              <span class="font-gilroy text-start mb-4" style="font-size: 24px; font-weight: 500; color: white">{{ data.title }} test</span>
               <span class="text-white mt-2 text-start mb-6 font-normal" style="font-size: 14px">
-              {{ data.mini_desc }}
+              {{ data.mini_desc }} - test
             </span>
               <div>
                 <router-link to="/organization-details">
@@ -90,17 +90,13 @@ export default {
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+  @apply flex flex-col absolute top-0 left-0 p-4;
+  justify-content: flex-end;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 114, 171, 0.7); /* Полупрозрачный синий цвет */
+  background-color: rgba(0, 114, 171, 0.7);
   opacity: 0;
   transition: opacity 0.5s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .overlay-text {

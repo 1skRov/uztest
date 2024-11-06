@@ -73,7 +73,7 @@ export default {
   }
   .btn-2 {
     display: none;
-    @apply flex gap-4 items-center;
+    @apply gap-4 items-center;
   }
 }
 @media (max-width : 992px) {
