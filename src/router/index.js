@@ -25,7 +25,7 @@ import notFound from "@/components/404.vue"
 
 const routes = [
   {
-    path: '/',
+    path: '/apps',
     name: 'home',
     component: FullPage,
     children: [
