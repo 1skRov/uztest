@@ -6,9 +6,15 @@ import MainPage from "@/pages/MainPage/MainPage.vue";
 export default {
   name: "FamousPersonDetailed",
   components: {MainPage, FooterPage, MainHeader},
+  props: {
+    person: {
+      type: Array,
+      default: () => []
+    }
+  },
   methods: {
     closeModal() {
-      this.$router.push('/famous-persons')
+      this.$router.go(-1);
     },
   },
 }
@@ -30,7 +36,7 @@ export default {
             <div class="w-full flex justify-end">
               <button @click="closeModal">
                 <span style="color:#0072AB; font-size: 20px">
-                  X
+                  X {{person}}
                 </span>
               </button>
             </div>

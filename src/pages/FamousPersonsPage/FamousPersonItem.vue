@@ -9,7 +9,7 @@ export default {
   },
   methods:{
     PersonDetail() {
-      this.$router.push({ name: 'person-detail' })
+      this.$router.push({ name: 'person-detail', params: { person : this.person } });
     },
   }
 }
