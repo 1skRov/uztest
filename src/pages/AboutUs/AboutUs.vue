@@ -21,7 +21,7 @@ export default {
     YouthOrganizations, FamousPersons, Section4, CultureAndTradition, OurStory, SideBar, WhoWeAre, Loading},
   data (){
     return {
-      sections: ['кто мы','наша история','культура','личности','молодежные организации','образование и спорт','помощь',],
+      sections: ['Кто мы','наша история','культура','личности','молодежные организации','образование и спорт','помощь',],
       currentSection: 0,
       s1: {},
       s2: {},
